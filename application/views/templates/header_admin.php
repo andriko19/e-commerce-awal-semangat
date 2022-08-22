@@ -139,89 +139,105 @@
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/users">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Pengguna</span></a
-          >
-        </li>
+        <?php if ($usersAdmin['role'] == "admin") : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/users">
+              <i class="fas fa-fw fa-users"></i>
+              <span>Pengguna</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/transaksi">
-            <i class="fas fa-fw fa-receipt"></i>
-            <span>Transaksi Pembelian</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/transaksi">
+              <i class="fas fa-fw fa-receipt"></i>
+              <span>Transaksi Pembelian</span></a
+            >
+          </li>
 
-        <?php $invoic = $this->db->get_where('payment_proof', ['status' => 0]); ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/proof">
-            <i class="fas fa-fw fa-shopping-cart"></i>
-            <?php if($invoic->num_rows() > 0){ ?>
-              <span>Bukti Bayar</span> <small class="badge badge-warning"><?= $invoic->num_rows() ?> new</small>
-            <?php }else{ ?>
-              <span>Bukti Bayar</span> </small>
-            <?php } ?>
-            </a
-          >
-        </li>
+          <?php $invoic = $this->db->get_where('payment_proof', ['status' => 0]); ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/proof">
+              <i class="fas fa-fw fa-shopping-cart"></i>
+              <?php if($invoic->num_rows() > 0){ ?>
+                <span>Bukti Bayar</span> <small class="badge badge-warning"><?= $invoic->num_rows() ?> new</small>
+              <?php }else{ ?>
+                <span>Bukti Bayar</span> </small>
+              <?php } ?>
+              </a
+            >
+          </li>
 
-        <?php $this->db->where('status', 0); $this->db->or_where('status', 1); $orders = $this->db->get('invoice'); ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
-            <i class="fas fa-fw fa-shopping-cart"></i>
-            <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a
-          >
-        </li>
+          <?php $this->db->where('status', 0); $this->db->or_where('status', 1); $orders = $this->db->get('invoice'); ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
+              <i class="fas fa-fw fa-shopping-cart"></i>
+              <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/email">
-            <i class="fas fa-fw fa-envelope"></i>
-            <span>Kirim Email</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/email">
+              <i class="fas fa-fw fa-envelope"></i>
+              <span>Kirim Email</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/categories">
-            <i class="fas fa-fw fa-tag"></i>
-            <span>Kategori</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/categories">
+              <i class="fas fa-fw fa-tag"></i>
+              <span>Kategori</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/products">
-            <i class="fas fa-fw fa-box-open"></i>
-            <span>Produk</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/products">
+              <i class="fas fa-fw fa-box-open"></i>
+              <span>Produk</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/promo">
-            <i class="fas fa-fw fa-fire"></i>
-            <span>Promo</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/promo">
+              <i class="fas fa-fw fa-fire"></i>
+              <span>Promo</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/testimonials">
-            <i class="fas fa-fw fa-comments"></i>
-            <span>Testimoni</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/testimonials">
+              <i class="fas fa-fw fa-comments"></i>
+              <span>Testimoni</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
-            <i class="fas fa-fw fa-file"></i>
-            <span>Halaman</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
+              <i class="fas fa-fw fa-file"></i>
+              <span>Halaman</span></a
+            >
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>administrator/settings">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Pengaturan</span></a
-          >
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/settings">
+              <i class="fas fa-fw fa-cog"></i>
+              <span>Pengaturan</span></a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/users_admin">
+              <i class="fas fa-fw fa-users"></i>
+              <span>Users Admin</span></a
+            >
+          </li>
+        <?php else : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url(); ?>administrator/transaksi">
+              <i class="fas fa-fw fa-receipt"></i>
+              <span>Transaksi Pembelian</span></a
+            >
+          </li>
+        <?php endif?>
 
         <br />
 
@@ -284,8 +300,8 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                    >Login sebagai Admin</span
-                  >
+                    >Login sebagai <?= $usersAdmin['role'];?> <br> (<?= $usersAdmin['nama'];?>)
+                  </span>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div

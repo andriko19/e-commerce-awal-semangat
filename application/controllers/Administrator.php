@@ -14,6 +14,7 @@ class Administrator extends CI_Controller {
         $this->load->model('Testi_model');
         $this->load->model('Order_model');
         $this->load->model('Transaksi_model');
+        $this->load->model('User_model');
 
         if(!$this->session->userdata('admin')){
             $cookie = get_cookie('djehbicd');
@@ -32,12 +33,16 @@ class Administrator extends CI_Controller {
 
     public function index(){
         $data['title'] = 'Dashboard - Admin Panel';
+        $username = $this->session->userdata('username');
+        $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/index');
         $this->load->view('templates/footer_admin');
     }
 
     public function users(){
+        $username = $this->session->userdata('username');
+        $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengguna - Admin Panel';
         $config['base_url'] = base_url() . 'administrator/users/';
         $config['total_rows'] = $this->User_model->getUsers("","")->num_rows();
@@ -84,6 +89,8 @@ class Administrator extends CI_Controller {
 
     // transaksi pembelian
     public function transaksi(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $data['title'] = 'Transaksi Pembayaran - Admin Panel';
       $config['base_url'] = base_url() . 'administrator/transaksi/';
       $config['total_rows'] = $this->Transaksi_model->getTransaksi("","")->num_rows();
@@ -148,6 +155,8 @@ class Administrator extends CI_Controller {
     }
 
     public function detail_transaksi($id_nota){
+        $username = $this->session->userdata('username');
+        $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Detail Transaksi - Admin Panel';
         $data['transaksi'] = $this->Transaksi_model->getTransaksiById($id_nota);
         $data['detailTransaksi'] = $this->Transaksi_model->getDetailTransaksiById($id_nota);
@@ -157,6 +166,8 @@ class Administrator extends CI_Controller {
     }
 
     public function print_transaksi($id_nota){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Print Detail Transaksi - Admin Panel';
         $data['transaksi'] = $this->Transaksi_model->getTransaksiById($id_nota);
         $data['detailTransaksi'] = $this->Transaksi_model->getDetailTransaksiById($id_nota);
@@ -164,6 +175,8 @@ class Administrator extends CI_Controller {
     }
 
     public function proof(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Bukti Pembayaran - Admin Panel';
         $data['proof'] = $this->db->get_where('payment_proof', ['status' => 0]);
         $this->load->view('templates/header_admin', $data);
@@ -196,6 +209,8 @@ class Administrator extends CI_Controller {
 
     // orders
     public function orders(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pesanan - Admin Panel';
         $config['base_url'] = base_url() . 'administrator/orders/';
         $config['total_rows'] = $this->Order_model->getOrders("","")->num_rows();
@@ -227,6 +242,8 @@ class Administrator extends CI_Controller {
     }
 
     public function detail_order($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         if($this->Order_model->getDataInvoice($id)){
             $data['title'] = 'Detail Pesanan - Admin Panel';
             $data['orders'] = $this->Order_model->getOrderByInvoice($id);
@@ -403,6 +420,8 @@ class Administrator extends CI_Controller {
 
     // email
     public function email(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Kirim Email - Admin Panel';
         $data['email'] = '';
         $this->db->select("*, email_send.id AS sendId");
@@ -416,6 +435,8 @@ class Administrator extends CI_Controller {
     }
 
     public function detail_email($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Detail Email - Admin Panel';
         $data['email'] = '';
         $this->db->select("*, email_send.id AS sendId");
@@ -432,6 +453,8 @@ class Administrator extends CI_Controller {
     }
 
     public function send_mail(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('sendMailTo', 'sendMailTo', 'required', ['required' => 'Ke wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Kirim Email - Admin Panel';
@@ -526,6 +549,8 @@ class Administrator extends CI_Controller {
 
     // categories
     public function categories(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Name', 'required', ['required' => 'Nama kategori wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Kategori - Admin Panel';
@@ -556,6 +581,8 @@ class Administrator extends CI_Controller {
     }
 
     public function category($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Name', 'required', ['required' => 'Nama kategori wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Edit Kategori - Admin Panel';
@@ -612,6 +639,8 @@ class Administrator extends CI_Controller {
 
     // products
     public function products(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Produk - Admin Panel';
         $config['base_url'] = base_url() . 'administrator/products/';
         $config['total_rows'] = $this->Products_model->getProducts("","")->num_rows();
@@ -643,6 +672,8 @@ class Administrator extends CI_Controller {
     }
 
     public function search_products(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $key = $_GET['q'];
         $data['title'] = 'Produk - Admin Panel';
         $config['base_url'] = base_url() . 'administrator/products/';
@@ -676,6 +707,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_product(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('title', 'title', 'required', ['required' => 'Judul wajib diisi']);
         $this->form_validation->set_rules('description', 'description', 'required', ['required' => 'Deskripsi wajib diisi']);
         if($this->form_validation->run() == false){
@@ -752,6 +785,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_img_product($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('help', 'help', 'required');
         if($this->form_validation->run() == false){
             $data['title'] = 'Tambah Gambar - Admin Panel';
@@ -782,6 +817,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_grosir_product($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('min', 'min', 'required', ['required' => 'Jumlah min. harus diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Tambah Harga Grosir - Admin Panel';
@@ -857,6 +894,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_product($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('title', 'title', 'required', ['required' => 'Judul wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Edit Produk - Admin Panel';
@@ -900,6 +939,8 @@ class Administrator extends CI_Controller {
     }
 
     public function product($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Detail Produk - Admin Panel';
         $data['product'] = $this->Products_model->getProductById($id);
         $this->load->view('templates/header_admin', $data);
@@ -921,6 +962,8 @@ class Administrator extends CI_Controller {
 
     // promo
     public function promo(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Promo Produk - Admin Panel';
         $config['base_url'] = base_url() . 'administrator/promo/';
         $config['total_rows'] = $this->Promo_model->getProducts("","")->num_rows();
@@ -977,6 +1020,8 @@ class Administrator extends CI_Controller {
 
     // testimonials
     public function testimonials(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Name', 'required', ['required' => 'Nama kategori wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Testimosi - Admin Panel';
@@ -997,6 +1042,8 @@ class Administrator extends CI_Controller {
     }
 
     public function testimonial($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Name', 'required', ['required' => 'Nama kategori wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Edit Testimosi - Admin Panel';
@@ -1028,7 +1075,10 @@ class Administrator extends CI_Controller {
         redirect(base_url() . 'administrator/testimonials');
     }
 
+    // pages
     public function pages(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Halaman - Admin Panel';
         $data['pages'] = $this->Settings_model->getPages();
         $this->load->view('templates/header_admin', $data);
@@ -1037,6 +1087,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_page(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('title', 'Judul', 'required', ['required' => 'Judul wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Tambah Halaman - Admin Panel';
@@ -1056,6 +1108,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_page($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('title', 'Judul', 'required', ['required' => 'Judul wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Edit Halaman - Admin Panel';
@@ -1087,8 +1141,74 @@ class Administrator extends CI_Controller {
         redirect(base_url() . 'administrator/pages');
     }
 
+    // users admin
+    public function users_admin(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
+      $data['title'] = 'Users Admin - Admin Panel';
+      $data['users_admin'] = $this->User_model->getUsersAdmin();
+      $this->load->view('templates/header_admin', $data);
+      $this->load->view('administrator/users_admin', $data);
+      $this->load->view('templates/footer_admin');
+    }
+
+    public function add_users_admin(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
+      $this->form_validation->set_rules('nama', 'Nama', 'required|trim', ['required' => 'Judul wajib diisi']);
+      $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[admin.username]', [
+        'required' => 'Judul wajib diisi',
+        'is_unique' => 'Username sudah digunakan! Ganti dengan yang lain.'
+      ]);
+      $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', [
+        'required' => 'Judul wajib diisi',
+        'min_length' => 'Password harus 6 karakter!',
+        'matches' => 'Password harus sama!'
+      
+      ]);
+      $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+
+      if($this->form_validation->run() == false){
+          $data['title'] = 'Tambah Users Admin - Admin Panel';
+          $this->load->view('templates/header_admin', $data);
+          $this->load->view('administrator/add_users_admin', $data);
+          $this->load->view('templates/footer_admin');
+      }else{
+          $data = [
+            'nama' => htmlspecialchars($this->input->post('nama', 'true')),
+            'username' => htmlspecialchars($this->input->post('username', 'true')),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'cookie' => null,
+            'role' => "kasir",
+          ];
+          $this->User_model->insertUsersAdmin($data);
+          $this->session->set_flashdata('upload', "<script>
+              swal({
+              text: 'Users Kasir berhasil ditambahkan',
+              icon: 'success'
+              });
+              </script>");
+          redirect(base_url() . 'administrator/users_admin');
+      }
+    }
+
+    public function delete_users_admin($id){
+      $this->db->where('id', $id);
+      $this->db->delete('admin');
+      $this->session->set_flashdata('upload', "<script>
+          swal({
+          text: 'Users Kasir Berhasil Dihapus',
+          icon: 'success'
+          });
+          </script>");
+      redirect(base_url() . 'administrator/users_admin');
+  }
+
+
     // settings
     public function settings(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengaturan - Admin Panel';
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/settings', $data);
@@ -1096,6 +1216,8 @@ class Administrator extends CI_Controller {
     }
 
     public function banner_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengaturan - Admin Panel';
         $data['banner'] = $this->Settings_model->getBanner();
         $this->load->view('templates/header_admin', $data);
@@ -1104,6 +1226,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_banner_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengaturan - Admin Panel';
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/add_setting_banner', $data);
@@ -1150,6 +1274,8 @@ class Administrator extends CI_Controller {
     }
 
     public function description_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengaturan - Admin Panel';
         $data['desc'] = $this->Settings_model->getSetting();
         $this->load->view('templates/header_admin', $data);
@@ -1158,6 +1284,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_description_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->Settings_model->editDescription();
         $this->session->set_flashdata('upload', "<script>
             swal({
@@ -1169,6 +1297,8 @@ class Administrator extends CI_Controller {
     }
 
     public function rekening_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pengaturan - Admin Panel';
         $data['rekening'] = $this->Settings_model->getRekening();
         $this->load->view('templates/header_admin', $data);
@@ -1177,6 +1307,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_rekening_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Nama', 'required', ['required' => 'Nama wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1196,6 +1328,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_rekening_setting($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Nama', 'required', ['required' => 'Nama wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1228,6 +1362,8 @@ class Administrator extends CI_Controller {
     }
 
     public function sosmed_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $data['title'] = 'Pengaturan - Admin Panel';
       $data['sosmed'] = $this->Settings_model->getSosmed();
       $this->load->view('templates/header_admin', $data);
@@ -1236,6 +1372,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_sosmed_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $this->form_validation->set_rules('name', 'Nama', 'required', ['required' => 'Nama wajib diisi']);
       if($this->form_validation->run() == false){
           $data['title'] = 'Pengaturan - Admin Panel';
@@ -1255,6 +1393,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_sosmed_setting($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('name', 'Nama', 'required', ['required' => 'Nama wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1287,6 +1427,8 @@ class Administrator extends CI_Controller {
     }
 
     public function address_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $this->form_validation->set_rules('address', 'Alamat', 'required', ['required' => 'Alamat wajib diisi']);
       if($this->form_validation->run() == false){
         $data['title'] = 'Pengaturan - Admin Panel';
@@ -1309,6 +1451,8 @@ class Administrator extends CI_Controller {
     }
 
     public function delivery_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Biaya Antar - Admin Panel';
         $data['delivery'] = $this->Settings_model->getCostDelivery();
         $this->load->view('templates/header_admin', $data);
@@ -1317,6 +1461,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_delivery_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('destination', 'Tujuan', 'required', ['required' => 'Tujuan wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1337,6 +1483,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_delivery_setting($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('destination', 'Tujuan', 'required', ['required' => 'Tujuan wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1372,6 +1520,8 @@ class Administrator extends CI_Controller {
     }
 
     public function cod_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Cash on Delivery - Admin Panel';
         $data['cod'] = $this->Settings_model->getCOD();
         $this->load->view('templates/header_admin', $data);
@@ -1380,6 +1530,8 @@ class Administrator extends CI_Controller {
     }
 
     public function add_cod_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->form_validation->set_rules('destination', 'Tujuan', 'required', ['required' => 'Tujuan wajib diisi']);
         if($this->form_validation->run() == false){
             $data['title'] = 'Pengaturan - Admin Panel';
@@ -1412,6 +1564,8 @@ class Administrator extends CI_Controller {
     }
 
     public function footer_setting(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $this->form_validation->set_rules('page', 'Page', 'required', ['required' => 'Page wajib diisi']);
       if($this->form_validation->run() == false){
         $data['title'] = 'Pengaturan - Admin Panel';
@@ -1457,6 +1611,8 @@ class Administrator extends CI_Controller {
 
     // edit
     public function edit(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Edit Profil Admin - Admin Panel';
         $admin = $this->db->get('admin')->row_array();
         $data['admin'] = $admin;
@@ -1466,6 +1622,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_username(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $this->db->set('username', $this->input->post('username'));
         $this->db->update('admin');
         $this->session->set_flashdata('upload', "<script>
@@ -1478,6 +1636,8 @@ class Administrator extends CI_Controller {
     }
 
     public function edit_pass(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $admin = $this->db->get('admin')->row_array();
         if(password_verify($this->input->post('oldPassword'), $admin['password'])){
             if($this->input->post('newPassword') ==  $this->input->post('confirmPassword')){
@@ -1512,8 +1672,8 @@ class Administrator extends CI_Controller {
     }
 
     public function logout(){
-        $sess = ['admin'];
-		$this->session->unset_userdata($sess);
+      $sess = ['admin'];
+		  $this->session->unset_userdata($sess);
         delete_cookie('djehbicd');
         redirect(base_url() . 'login/admin');
     }

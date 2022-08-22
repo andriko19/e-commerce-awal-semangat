@@ -96,26 +96,29 @@ class Home extends CI_Controller {
 		$this->load->helper('cookie');
 		if($this->session->userdata('admin')){
 			redirect(base_url() . 'administrator');
-        }else{
+    }else{
 			$cookie = get_cookie('djehbicd');
-            if($cookie != NULL){
+      if($cookie != NULL){
 				$getCookie = $this->db->get_where('admin', ['cookie' => $cookie])->row_array();
-                if($getCookie){
-                    $dataCookie = $getCookie;
-                    $this->session->set_userdata('admin', true);
+        if($getCookie){
+					$dataCookie = $getCookie;
+					$this->session->set_userdata('admin', true);
 					redirect(base_url() . 'administrator');
-                }
-            }
+        }
+      }
 		}
+
         $this->form_validation->set_rules('username', 'username', 'required', ['required' => 'username wajib diisi']);
         if($this->form_validation->run() == false){
           $this->load->view('login');
+					// $this->session->unset_userdata();
         }else{
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $cookie = $this->input->post('cookie');
             $admin = $this->db->get_where('admin', ['username' => $username])->row_array();
 
+						
             if($admin){
                 if(password_verify($password, $admin['password'])){
                   
@@ -123,13 +126,22 @@ class Home extends CI_Controller {
                     $key = random_string('alnum', 64);
                     set_cookie('djehbicd', $key, 3600*24*30*12);
                     $this->db->set('cookie', $key);
+										$this->db->where('username', $admin['username']);
                     $this->db->update('admin');
                 }
-                                
+                $data = [
+									'username' => $admin['username'],
+									'nama' => $admin['nama'],
+									'role' => $admin['role']
+								];            
                 $this->session->set_userdata('admin', true);
                 $this->session->set_userdata($data);
 
-                redirect(base_url() . 'administrator');
+								if ($admin['role'] == 'admin') {
+									redirect(base_url() . 'administrator');
+								} else {
+									redirect(base_url() . 'administrator');
+								}
 
                 }else{
                   $this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">

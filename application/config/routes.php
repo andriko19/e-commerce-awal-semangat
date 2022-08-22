@@ -63,3 +63,5 @@ $route['administrator/setting/cod'] = 'administrator/cod_setting';
 $route['administrator/setting/cod/add'] = 'administrator/add_cod_setting';
 $route['administrator/setting/footer'] = 'administrator/footer_setting';
 $route['(:any)'] = 'page/index/$1';
+
+$route['administrator/users_admin/add'] = 'administrator/add_users_admin';

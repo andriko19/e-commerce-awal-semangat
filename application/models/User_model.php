@@ -144,4 +144,12 @@ class User_model extends CI_Model {
         }
     }
 
+    public function getUsersAdmin(){
+        return $this->db->get('admin');
+    }
+
+    public function insertUsersAdmin($data){
+        $this->db->insert('admin', $data);
+    }
+
 }
