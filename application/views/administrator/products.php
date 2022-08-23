@@ -13,10 +13,10 @@
 				class="btn btn-primary btn-sm"
 				>Tambah Produk</a
 			>
-			<form action="<?=base_url();?>administrator/products/search" method="get" class="form-inline float-right">
+			<!-- <form action="<?=base_url();?>administrator/products/search" method="get" class="form-inline float-right">
 				<input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" autocomplete="off" value="<?= $search; ?>">
       			<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			</form> -->
 		</div>
 		<div class="card-body">
             <?php echo $this->session->flashdata('failed'); ?> 
@@ -68,7 +68,7 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-					<?= $this->pagination->create_links(); ?>
+					
 				</div>
 				<?php }else{ ?>
 				<div class="alert alert-warning" role="alert">

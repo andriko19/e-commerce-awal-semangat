@@ -13,10 +13,10 @@
 				class="btn btn-primary btn-sm"
 				>Tambah Transaksi</a
 			>
-			<form action="<?=base_url();?>administrator/transaksi/search" method="get" class="form-inline float-right">
-				<input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" autocomplete="off" value="<?= $search; ?>">
+			<!-- <form action="<?=base_url();?>administrator/transaksi/search" method="get" class="form-inline float-right">
+				<input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search No. Nota" aria-label="Search" name="q" autocomplete="off" value="<?= $search; ?>">
       		<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			</form> -->
 		</div>
 		
 		<div class="card-body">
@@ -40,7 +40,8 @@
 								<th style="width: 130px">Aksi</th>
 							</tr>
 						</thead>
-						<tfoot></tfoot>
+						<tfoot>
+						</tfoot>
 						<tbody class="data-content">
 							<?php $no = $this->uri->segment(3) + 1; ?>
 							<?php foreach($getTransaksi->result_array() as $data): ?>

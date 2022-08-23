@@ -3,12 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Promo_model extends CI_Model {
 
-    public function getProducts($number,$offset){
+    public function getProducts(){
         $this->db->select("products.id AS productsId, products.title AS productsTitle, products.price AS productsPrice, products.stock AS productsStock, products.date_submit AS productsDate, products.img AS productsImg, products.publish AS productsPublish, categories.name AS categoriesName");
         $this->db->join("categories", "products.category=categories.id");
         $this->db->order_by("products.id", "desc");
         $this->db->where('products.promo_price= 0');
-        return $this->db->get("products",$number,$offset);
+        return $this->db->get("products");
     }
 
     public function getPromo(){

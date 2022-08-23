@@ -23,7 +23,7 @@
             <br>
             <p class="cetak-center">Jalan Raya Benowo 1-3, Surabaya, <br> Jawa Timur - Indonesia</p>
             <hr style="border-style: dashed; border-width: 0.1125em;">
-            <p>ID. Nota : <?= $transaksi['id_nota'];?> <br> Tanggal Transaksi : <?= $transaksi['date'];?> </p>
+            <p>ID. Nota : <?= $transaksi['id_nota'];?> <br> Tanggal Transaksi : <?= $transaksi['date'];?> <br> Kasir : <?= $usersAdmin['nama'];?> </p>
             <hr style="border-style: dashed; border-width: 0.1125em;">
             
             <table>
