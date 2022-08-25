@@ -13,14 +13,16 @@
 				class="btn btn-primary btn-sm"
 				>Tambah Transaksi</a
 			>
-			<!-- <form action="<?=base_url();?>administrator/transaksi/search" method="get" class="form-inline float-right">
-				<input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search No. Nota" aria-label="Search" name="q" autocomplete="off" value="<?= $search; ?>">
-      		<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-			</form> -->
+			<form action="<?=base_url();?>administrator/cetak_transaksi" method="post" class="form-inline float-right">
+				Laporan :
+				<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Awal" aria-label="tanggal_awal" name="tanggal_awal" autocomplete="off"> s/d
+				<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Akhir" aria-label="tanggal_akhir" name="tanggal_akhir" autocomplete="off">
+      	<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cetak</button>
+			</form>
 		</div>
 		
 		<div class="card-body">
-				<?php echo $this->session->flashdata('failed'); ?> 
+				<?php echo $this->session->flashdata('failed'); ?>
 				<?php if($getTransaksi->num_rows() > 0){ ?>
 
 				<div class="table-responsive">
@@ -59,7 +61,7 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-					<?= $this->pagination->create_links(); ?>
+					
 				</div>
 
 				<?php }else{ ?>

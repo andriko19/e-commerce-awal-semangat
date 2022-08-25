@@ -92,32 +92,32 @@ class Administrator extends CI_Controller {
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $id_admin = $data['usersAdmin']['id'];
-    //   var_dump($id_admin);
-    //   die;
-      $data['title'] = 'Transaksi Pembayaran - Admin Panel';
-      $config['base_url'] = base_url() . 'administrator/transaksi/';
-      $config['total_rows'] = $this->Transaksi_model->getTransaksi("","")->num_rows();
-      $config['per_page'] = 10;
-      $config['first_link']       = 'First';
-      $config['last_link']        = 'Last';
-      $config['next_link']        = 'Next';
-      $config['prev_link']        = 'Prev';
-      $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-      $config['full_tag_close']   = '</ul></nav></div>';
-      $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-      $config['num_tag_close']    = '</span></li>';
-      $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-      $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-      $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-      $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-      $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-      $config['prev_tagl_close']  = '</span>Next</li>';
-      $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-      $config['first_tagl_close'] = '</span></li>';
-      $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-      $config['last_tagl_close']  = '</span></li>';
-      $from = $this->uri->segment(3);
-      $this->pagination->initialize($config);
+        //   var_dump($id_admin);
+        //   die;
+          $data['title'] = 'Transaksi Pembayaran - Admin Panel';
+        //   $config['base_url'] = base_url() . 'administrator/transaksi/';
+        //   $config['total_rows'] = $this->Transaksi_model->getTransaksi("","")->num_rows();
+        //   $config['per_page'] = 10;
+        //   $config['first_link']       = 'First';
+        //   $config['last_link']        = 'Last';
+        //   $config['next_link']        = 'Next';
+        //   $config['prev_link']        = 'Prev';
+        //   $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        //   $config['full_tag_close']   = '</ul></nav></div>';
+        //   $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        //   $config['num_tag_close']    = '</span></li>';
+        //   $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        //   $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        //   $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        //   $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        //   $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        //   $config['prev_tagl_close']  = '</span>Next</li>';
+        //   $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        //   $config['first_tagl_close'] = '</span></li>';
+        //   $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        //   $config['last_tagl_close']  = '</span></li>';
+        //   $from = $this->uri->segment(3);
+        //   $this->pagination->initialize($config);
       if ($id_admin == 1){
         $data['getTransaksi'] = $this->Transaksi_model->getTransaksi($config['per_page'], $from);
       } else {
@@ -128,40 +128,37 @@ class Administrator extends CI_Controller {
       $this->load->view('templates/footer_admin');
     }
 
-    public function search_transaksi(){
-        $username = $this->session->userdata('username');
-        $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        $id_admin = $data['usersAdmin']['id'];
-        $key = $_GET['q'];
-        $data['title'] = 'Transaksi Pembayaran - Admin Panel';
-        $config['base_url'] = base_url() . 'administrator/transaksi/';
-        $config['total_rows'] = $this->Transaksi_model->getSearchTransaksi($key,"","")->num_rows();
-        $config['per_page'] = 10;
-        $config['first_link']       = 'First';
-        $config['last_link']        = 'Last';
-        $config['next_link']        = 'Next';
-        $config['prev_link']        = 'Prev';
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close']  = '</span>Next</li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close']  = '</span></li>';
-        $from = $this->uri->segment(3);
-        $this->pagination->initialize($config);
-        $data['getTransaksi'] = $this->Transaksi_model->getSearchTransaksi($key,$config['per_page'], $from);
-        $data['search'] = $key;
-        $this->load->view('templates/header_admin', $data);
-        $this->load->view('administrator/transaksi', $data);
-        $this->load->view('templates/footer_admin');
+    public function cetak_transaksi(){
+        $tanggal_awal = $this->input->post('tanggal_awal');
+        $tanggal_akhir = $this->input->post('tanggal_akhir');
+
+        $data['tanggal_awal'] = $tanggal_awal;
+        $data['tanggal_akhir'] = $tanggal_akhir;
+        $data['getLaporan'] = $this->Transaksi_model->getLaporan($tanggal_awal, $tanggal_akhir);
+        // date_format($tanggal_awal,"Y/m/d H:i:s");
+        // var_dump($tanggal_awal);
+        // var_dump($tanggal_akhir);
+        // die;
+
+        // $data = array(
+        //     "dataku" => array(
+        //         "nama" => "Awal Semangat",
+        //         "url" => "http://awal_semangat.id",
+        //         "tanggal_awal" => $tanggal_awal,
+        //         "tanggal_akhir" => $tanggal_akhir
+        //     )
+        // );
+    
+        $this->load->library('dompdf_gen');
+    
+        // $this->dompdf_gen->setPaper('A4', 'potrait');
+        // $this->dompdf_gen->filename = "laporan-petanikode.pdf";
+        // $this->dompdf_gen->load_view('administrator/laporan_pdf', $data);
+
+        $this->dompdf_gen->setFileName('Laporan Pembelian '.date("Y-m-d H:i:s").'.pdf');
+        $this->dompdf_gen->setPaper('A4', 'potrait');
+        $this->dompdf_gen->loadView('administrator/laporan_pdf', $data);
+
     }
 
     public function detail_transaksi($id_nota){
@@ -222,29 +219,29 @@ class Administrator extends CI_Controller {
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
         $data['title'] = 'Pesanan - Admin Panel';
-        $config['base_url'] = base_url() . 'administrator/orders/';
-        $config['total_rows'] = $this->Order_model->getOrders("","")->num_rows();
-        $config['per_page'] = 10;
-        $config['first_link']       = 'First';
-        $config['last_link']        = 'Last';
-        $config['next_link']        = 'Next';
-        $config['prev_link']        = 'Prev';
-        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav></div>';
-        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close']    = '</span></li>';
-        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close']  = '</span>Next</li>';
-        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close']  = '</span></li>';
-        $from = $this->uri->segment(3);
-        $this->pagination->initialize($config);
+        // $config['base_url'] = base_url() . 'administrator/orders/';
+        // $config['total_rows'] = $this->Order_model->getOrders("","")->num_rows();
+        // $config['per_page'] = 10;
+        // $config['first_link']       = 'First';
+        // $config['last_link']        = 'Last';
+        // $config['next_link']        = 'Next';
+        // $config['prev_link']        = 'Prev';
+        // $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        // $config['full_tag_close']   = '</ul></nav></div>';
+        // $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        // $config['num_tag_close']    = '</span></li>';
+        // $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        // $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        // $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        // $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['prev_tagl_close']  = '</span>Next</li>';
+        // $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        // $config['first_tagl_close'] = '</span></li>';
+        // $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        // $config['last_tagl_close']  = '</span></li>';
+        // $from = $this->uri->segment(3);
+        // $this->pagination->initialize($config);
         $data['orders'] = $this->Order_model->getOrders($config['per_page'], $from);
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/orders', $data);
@@ -651,7 +648,7 @@ class Administrator extends CI_Controller {
     public function products(){
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        // $data['title'] = 'Produk - Admin Panel';
+        $data['title'] = 'Produk - Admin Panel';
         // $config['base_url'] = base_url() . 'administrator/products/';
         // $config['total_rows'] = $this->Products_model->getProducts("","")->num_rows();
         // $config['per_page'] = 10;
@@ -974,7 +971,7 @@ class Administrator extends CI_Controller {
     public function promo(){
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        // $data['title'] = 'Promo Produk - Admin Panel';
+        $data['title'] = 'Promo Produk - Admin Panel';
         // $config['base_url'] = base_url() . 'administrator/promo/';
         // $config['total_rows'] = $this->Promo_model->getProducts("","")->num_rows();
         // $config['per_page'] = 10;
@@ -1188,7 +1185,7 @@ class Administrator extends CI_Controller {
             'nama' => htmlspecialchars($this->input->post('nama', 'true')),
             'username' => htmlspecialchars($this->input->post('username', 'true')),
             'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-            'cookie' => null,
+            'cookie' => "",
             'role' => "kasir",
           ];
           $this->User_model->insertUsersAdmin($data);
@@ -1212,8 +1209,7 @@ class Administrator extends CI_Controller {
           });
           </script>");
       redirect(base_url() . 'administrator/users_admin');
-  }
-
+    }
 
     // settings
     public function settings(){

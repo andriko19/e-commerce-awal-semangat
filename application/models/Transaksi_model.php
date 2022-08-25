@@ -31,6 +31,7 @@ class Transaksi_model extends CI_Model {
   public function getTransaksiById($id_nota){
     $this->db->select("*");
     $this->db->from("payment_transaction");
+    $this->db->join("admin", "payment_transaction.id_admin=admin.id");
     $this->db->where('payment_transaction.id_nota', $id_nota);
     return $this->db->get()->row_array();
   }
@@ -40,6 +41,15 @@ class Transaksi_model extends CI_Model {
     $this->db->from("payment_transaction_detail");
     $this->db->where('payment_transaction_detail.id_nota', $id_nota);
     return $this->db->get();
+  }
+
+  public function getLaporan($tanggal_awal, $tanggal_akhir){
+    $query = $this->db->get_where('payment_transaction', array('date>=' => $tanggal_awal, 'date<=' => $tanggal_akhir));
+    // $this->db->select("*");
+    // $this->db->from("payment_transaction");
+    // $this->db->where('payment_transaction_d', $id_nota);
+    // return $this->db->get();
+    return $query->result_array();
   }
 
 }

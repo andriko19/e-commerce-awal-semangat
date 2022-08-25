@@ -21,9 +21,9 @@
               <img style="width:70px;" src="<?= base_url(); ?>assets/images/logo/favicon.png">
             </div>
             <br>
-            <p class="cetak-center">Jalan Raya Benowo 1-3, Surabaya, <br> Jawa Timur - Indonesia</p>
+            <p class="cetak-center">Semua orang berhak minum enak</p>
             <hr style="border-style: dashed; border-width: 0.1125em;">
-            <p>ID. Nota : <?= $transaksi['id_nota'];?> <br> Tanggal Transaksi : <?= $transaksi['date'];?> <br> Kasir : <?= $usersAdmin['nama'];?> </p>
+            <p>ID. Nota : <?= $transaksi['id_nota'];?> <br> Tanggal Transaksi : <?= $transaksi['date'];?> <br> Kasir : <?= $transaksi['nama'];?> </p>
             <hr style="border-style: dashed; border-width: 0.1125em;">
             
             <table>
@@ -58,7 +58,7 @@
               </div>
             </div>
             <br>
-            <p class="cetak-center">Terima kasih atas kunjungan anda <br> Semoga anda puas dengan product dan pelayanan kami</p>
+            <p class="cetak-center">Terima kasih atas kunjungan anda <br> Semoga anda puas dengan produk dan pelayanan kami</p>
             <hr style="border-style: dashed; border-width: 0.1125em;">
             <p class="cetak-center">Website : https://awalsemangat.id</p>
           </div>
