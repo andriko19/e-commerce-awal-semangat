@@ -40,6 +40,7 @@ $route['administrator/product/add'] = 'administrator/add_product';
 $route['administrator/product/add-img/(:num)'] = 'administrator/add_img_product/$1';
 $route['administrator/product/grosir/(:num)'] = 'administrator/add_grosir_product/$1';
 $route['administrator/product/(:num)/edit'] = 'administrator/edit_product/$1';
+$route['administrator/transaksi/add'] = 'administrator/add_transaksi';
 $route['administrator/transaksi/search'] = 'administrator/search_transaksi';
 $route['administrator/detail_transaksi/(:num)'] = 'administrator/detail_transaksi/$1';
 $route['administrator/email/send'] = 'administrator/send_mail';

@@ -92,32 +92,7 @@ class Administrator extends CI_Controller {
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
       $id_admin = $data['usersAdmin']['id'];
-        //   var_dump($id_admin);
-        //   die;
           $data['title'] = 'Transaksi Pembayaran - Admin Panel';
-        //   $config['base_url'] = base_url() . 'administrator/transaksi/';
-        //   $config['total_rows'] = $this->Transaksi_model->getTransaksi("","")->num_rows();
-        //   $config['per_page'] = 10;
-        //   $config['first_link']       = 'First';
-        //   $config['last_link']        = 'Last';
-        //   $config['next_link']        = 'Next';
-        //   $config['prev_link']        = 'Prev';
-        //   $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        //   $config['full_tag_close']   = '</ul></nav></div>';
-        //   $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-        //   $config['num_tag_close']    = '</span></li>';
-        //   $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-        //   $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-        //   $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-        //   $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-        //   $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-        //   $config['prev_tagl_close']  = '</span>Next</li>';
-        //   $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-        //   $config['first_tagl_close'] = '</span></li>';
-        //   $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-        //   $config['last_tagl_close']  = '</span></li>';
-        //   $from = $this->uri->segment(3);
-        //   $this->pagination->initialize($config);
       if ($id_admin == 1){
         $data['getTransaksi'] = $this->Transaksi_model->getTransaksi($config['per_page'], $from);
       } else {
@@ -128,6 +103,236 @@ class Administrator extends CI_Controller {
       $this->load->view('templates/footer_admin');
     }
 
+    public function add_transaksi(){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
+      $data['title'] = 'Transaksi Pembayaran - Admin Panel';
+      $data['get_id_nota']=$this->Transaksi_model->get_id_nota();
+      $this->load->view('administrator/add_transaksi', $data);
+    //   $this->load->view('templates/footer_admin');
+    }
+
+    public function search_product()
+    {
+      $data = $this->Transaksi_model->search_product($_REQUEST['keyword']);
+      echo json_encode($data);
+    }
+
+    public function add_keranjang()
+    {
+      $data = [
+        'id'    => $this->input->post('product_id'),
+        'name'  => $this->input->post('product_name'),
+        'price' => $this->input->post('selling_price2'),
+        'qty'   => $this->input->post('product_qty'),
+      ];
+      echo json_encode([
+        'status' => $this->cart->insert($data),
+        'total'  => $this->cart->total(),
+      ]);
+    }
+
+    public function list_shoping_cart()
+    {
+      $data = [];
+      $no   = 1;
+
+      foreach ($this->cart->contents() as $items) {
+        $row   = [];
+        $row[] = $no;
+        $row[] = $items['name'];
+        $row[] = 'Rp. ' . number_format($items['price'], 0, '', '.') . ',-';
+        $row[] = $items['qty'];
+                // '
+                //     <nav aria-label="Page navigation example">
+                //       <ul class="pagination pagination-sm">
+                //         <li class="page-item">
+                //           <a class="page-link bg-danger" href="javascript:void(0)" onclick="minus_cart(' . $items['id'] . ', ' . "'" . $items['name'] . "'" . ', ' . $items['price'] . ', ' . $items['qty'] . ', ' . "'" . $items['rowid'] . "'" . ')">
+                //             <i class="fas fa-minus fas-xs text-white"></i>
+                //           </a>
+                //         </li>
+                //         <li class="page-item border border-light pl-2 pr-2">
+                //           ' . $items['qty'] . '
+                //         </li>
+                //         <li class="page-item">
+                //           <a class="page-link bg-success" href="javascript:void(0)" onclick="plus_cart(' . $items['id'] . ', ' . "'" . $items['name'] . "'" . ', ' . $items['price'] . ' )">
+                //             <i class="fas fa-plus fas-xs text-white"></i>
+                //           </a>
+                //         </li>
+                //       </ul>
+                //     </nav>
+                //   ';
+
+        $row[] = 'Rp. ' . number_format($items['qty'] * $items['price'], 0, '', '.') . ',-';
+                  $sub_total = $items['qty'] * $items['price'];
+        $row[] = '<a href="javascript:void(0)" style="" onclick="delete_cart(' . "'" . $items['rowid'] . "'" . ')">
+                    <i class="fas fa-times text-danger"></i>
+                  </a>';
+        $data[] = $row;
+        $no++;
+      }
+      $output = [
+        'data' => $data,
+      ];
+      echo json_encode($output);
+    }
+
+    public function delete_shoping_cart($rowid)
+    {
+      $res = $this->cart->update(
+        [
+          'rowid' => $rowid,
+          'qty'   => 0,
+        ]
+      );
+      if (! $res) {
+        echo json_encode(
+          [
+            'status'  => 200,
+            'message' => 'Internal server error',
+            'total'   => $this->cart->total(),
+          ]
+        );
+
+        return;
+      }
+      echo json_encode(
+        [
+          'status'  => 200,
+          'message' => 'success',
+          'total'   => $this->cart->total(),
+        ]
+      );
+    }
+
+    public function save_orders()
+	{
+		// $this->load->model('model_merchant');
+		$bayar   = $this->input->post('bayar');
+		$kembali = $this->input->post('kembali');
+        $id_nota = $this->input->post('id_nota');
+		// $toko    = $this->Transaksi_model->find_merchant();
+        $username = $this->session->userdata('username');
+        $data = $this->db->get_where('admin', ['username' => $username])->row();
+		$no      = 1;
+		$output  = '';
+
+		$output .= '<div>';
+
+		$output .= '
+              <div style="text-align: center; font-size: 20px; font-weight: bold;"> Awal Semangat</div>
+              <div style="text-align: center"> Semua orang berhak minum enak <br/> <br/> <input class="form-control" type="hidden" name="id_nota_transaction" id="id_nota_transaction" readonly="" placeholder="0" value="' . $id_nota . '"></div>
+              <div> No. Nota : ' . $id_nota . '</div>
+              <div> Kasir : ' . $data->nama . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . date('Y-m-d  h:i:s') . '</div>
+              
+              ';
+		$output .= '<div style="border-top:1px dashed; border-bottom:1px dashed; margin: 20px 0;">'; // body
+
+		$output .= '<div style="display: flex; border-bottom:1px dashed; margin-bottom: 10px;">
+                  <div style="width: 20%; font-weight: bold;">No</div>
+                  <div style="width: 35%; font-weight: bold;">Nama</div>
+                  <div style="width: 15%; font-weight: bold;">Harga</div>
+                  <div style="width: 15%; font-weight: bold; text-align: center;">Qty</div>
+                  <div style="width: 35%; font-weight: bold;">Sub Total</div>
+                </div>
+              ';
+
+		foreach ($this->cart->contents() as $row) {
+			$output .= '
+                <div style="display: flex; margin-bottom: 10px;">
+                  <div style="width: 10%;">' . $no++ . '</div>
+                  <div style="width: 40%;">' . $row['name'] . '</div>
+                  <div style="width: 20%;">Rp.' . $row['price'] . '</div>
+                  <div style="width: 15%; text-align: center;">' . $row['qty'] . '</div>
+                  <div style="width: 35%;">Rp.' . $row['price'] * $row['qty']. '</div>
+                </div>';
+		}
+
+		$output .= '</div>';
+
+		$output .= '
+                <div style="display: flex;">
+                  <div style="width: 80%; text-align: right;">Total</div>
+                  <div style="width: 5%; text-align: center;">:</div>
+                  <div style="width: 35%;">Rp.' . number_format($this->cart->total(), 0, ',', '.') . '</div>
+                </div>
+              ';
+
+		$output .= '
+                <div style="display: flex;">
+                  <div style="width: 80%; text-align: right;">Bayar</div>
+                  <div style="width: 5%; text-align: center;">:</div>
+                  <div style="width: 35%;">Rp.' . number_format($bayar, 0, ',', '.') . '</div>
+                </div>
+              ';
+
+		$output .= '
+                <div style="display: flex;">
+                  <div style="width: 80%; text-align: right;">Kembali</div>
+                  <div style="width: 5%; text-align: center;">:</div>
+                  <div style="width: 35%;">Rp.' . $kembali . '</div>
+                </div>
+              ';
+
+		$output .= '<div style="text-align:center; margin: 20px 0;">
+                  Terimakasih atas kunjungan anda <br/> Semoga anda puas dengan produk dan pelayanan kami <br/> Website : https://awalsemangat.id
+                </div>';
+		$output .= '</div>';
+		echo $output;
+	}
+
+    public function shoping()
+	{   
+        $username = $this->session->userdata('username');
+        $data = $this->db->get_where('admin', ['username' => $username])->row();
+		$id_nota_transaction = $this->input->post('id_nota_transaction');
+		$response         = [];
+		if ($this->cart->contents() !== []) {
+			$time_transaction = date('Y-m-d  h:i:s');
+
+            $order = [
+                'id_nota'   => $id_nota_transaction,
+                'date'      => $time_transaction,
+                'price'     => $this->cart->total(),
+                'status'    => "selesai",
+                'id_admin'  => $data->id,
+                
+            ];
+
+            // insert ke tabel payment_transaction
+            $this->Transaksi_model->create_order($order);
+
+			foreach ($this->cart->contents() as $cart) {
+				$detailOrder = [
+					'id_nota'       => $id_nota_transaction,
+					'products_name'  => $cart['name'],
+					'price'         => $cart['price'],
+					'qty'           => $cart['qty'],
+				];
+
+                // kurangi stock pada tabel product
+				// $res      = $this->model_product->get_product_qty($cart['id']);
+				// $last_qty = $res->product_qty - $cart['qty'];
+				// $this->model_product->update_product_qty($cart['id'], $last_qty);
+
+                // insert ke tabel payment_transaction_detail
+                $this->Transaksi_model->create_detail_order($detailOrder);
+			}
+
+			$this->cart->destroy();
+			$response = [
+				'status'  => 200,
+				'message' => 'success',
+			];
+		} else {
+			$response = [
+				'status'  => 400,
+				'message' => 'internal server error',
+			];
+		}
+		echo json_encode($response);
+	}
+
     public function cetak_transaksi(){
         $tanggal_awal = $this->input->post('tanggal_awal');
         $tanggal_akhir = $this->input->post('tanggal_akhir');
@@ -135,9 +340,12 @@ class Administrator extends CI_Controller {
         $data['tanggal_awal'] = $tanggal_awal;
         $data['tanggal_akhir'] = $tanggal_akhir;
         $data['getLaporan'] = $this->Transaksi_model->getLaporan($tanggal_awal, $tanggal_akhir);
+        // $path = dirname(__DIR__);
+        // $path1 = realpath("logo.png");
         // date_format($tanggal_awal,"Y/m/d H:i:s");
-        // var_dump($tanggal_awal);
-        // var_dump($tanggal_akhir);
+        // var_dump($path);
+        // $html = "<img src=' $path1 '";
+        // var_dump($html);
         // die;
 
         // $data = array(

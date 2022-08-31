@@ -13,12 +13,15 @@
 				class="btn btn-primary btn-sm"
 				>Tambah Transaksi</a
 			>
-			<form action="<?=base_url();?>administrator/cetak_transaksi" method="post" class="form-inline float-right">
-				Laporan :
-				<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Awal" aria-label="tanggal_awal" name="tanggal_awal" autocomplete="off"> s/d
-				<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Akhir" aria-label="tanggal_akhir" name="tanggal_akhir" autocomplete="off">
-      	<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cetak</button>
-			</form>
+			<?php if ($usersAdmin['id'] == 1) : ?>
+				<form action="<?=base_url();?>administrator/cetak_transaksi" method="post" class="form-inline float-right">
+					Laporan :
+					<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Awal" aria-label="tanggal_awal" name="tanggal_awal" autocomplete="off"> s/d
+					<input class="form-control form-control-sm mr-sm-2 ml-sm-2" type="date" placeholder="Tanggal Akhir" aria-label="tanggal_akhir" name="tanggal_akhir" autocomplete="off">
+					<button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cetak</button>
+				</form>
+			<?php endif; ?>
+			
 		</div>
 		
 		<div class="card-body">
@@ -67,7 +70,7 @@
 				<?php }else{ ?>
 
 				<div class="alert alert-warning" role="alert">
-					Opss, produk masih kosong, yuk tambah produk sekarang.
+					Maaf, transaksi pembelian masih kosong.
 				</div>
 				
 				<?php } ?>

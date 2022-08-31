@@ -14,11 +14,7 @@
 		</div>
 		<div class="card-body">
 			<?php echo $this->session->flashdata('failed'); ?>
-			<form
-				action="<?= base_url(); ?>administrator/product/add"
-				method="post"
-				enctype="multipart/form-data"
-			>
+			<form action="<?= base_url(); ?>administrator/product/add" method="post" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-6">
 						<div class="form-group">

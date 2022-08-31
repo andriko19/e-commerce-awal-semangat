@@ -45,11 +45,57 @@ class Transaksi_model extends CI_Model {
 
   public function getLaporan($tanggal_awal, $tanggal_akhir){
     $query = $this->db->get_where('payment_transaction', array('date>=' => $tanggal_awal, 'date<=' => $tanggal_akhir));
-    // $this->db->select("*");
-    // $this->db->from("payment_transaction");
-    // $this->db->where('payment_transaction_d', $id_nota);
-    // return $this->db->get();
+    // $this->db->order_by("payment_transaction.id", "desc");
     return $query->result_array();
   }
+
+  public function search_product($key)
+	{
+		$this->db->select('*');
+		$this->db->like('title', $key);
+		$this->db->or_like('id', $key);
+		$this->db->limit(10);
+		$query = $this->db->get('products');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $data) {
+				$hasil[] = $data;
+			}
+
+			return $hasil;
+		}
+	}
+
+  public function get_id_nota()
+  {
+    $q = $this->db->query("SELECT MAX(RIGHT(id,4)) AS kd_max FROM payment_transaction WHERE DATE(date)=CURDATE()");
+    $kd = "";
+    if($q->num_rows()>0){
+        foreach($q->result() as $k){
+            $tmp = ((int)$k->kd_max)+1;
+            $kd = sprintf("%04s", $tmp);
+        }
+    }else{
+        $kd = "0001";
+    }
+    date_default_timezone_set('Asia/Jakarta');
+    return date('dmy').$kd;
+  }
+
+  public function find_merchant()
+	{
+		$this->db->select('*');
+
+		return $this->db->get('payment_transaction')->row();
+	}
+
+  public function create_order($order)
+	{
+		return $this->db->insert('payment_transaction', $order);
+	}
+
+  public function create_detail_order($detailOrder)
+	{
+		return $this->db->insert('payment_transaction_detail', $detailOrder);
+	}
 
 }

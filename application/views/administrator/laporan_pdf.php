@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Cetak Laporan Pdf</title>
+    <title>Cetak Laporan Pdf <?= date("Y-m-d H:i:s");?></title>
     <style type="text/css">
       .header {
       
@@ -24,10 +24,10 @@
   <body>
 
   <?php
-    $path = 'logo.pnfg';
+    $path = dirname(__DIR__);
     $type = pathinfo($path, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
-    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    $base64 = 'data:image/png;base64,' . base64_encode($data);
   ?>
     <!-- <img src="<?php echo $base64?>"/> -->
   
