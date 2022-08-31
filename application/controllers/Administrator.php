@@ -94,9 +94,9 @@ class Administrator extends CI_Controller {
       $id_admin = $data['usersAdmin']['id'];
           $data['title'] = 'Transaksi Pembayaran - Admin Panel';
       if ($id_admin == 1){
-        $data['getTransaksi'] = $this->Transaksi_model->getTransaksi($config['per_page'], $from);
+        $data['getTransaksi'] = $this->Transaksi_model->getTransaksi();
       } else {
-        $data['getTransaksi'] = $this->Transaksi_model->getTransaksiKasir($config['per_page'], $from, $id_admin);
+        $data['getTransaksi'] = $this->Transaksi_model->getTransaksiKasir($id_admin);
       }
       $this->load->view('templates/header_admin', $data);
       $this->load->view('administrator/transaksi', $data);

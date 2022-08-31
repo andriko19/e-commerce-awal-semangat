@@ -3,16 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Transaksi_model extends CI_Model {
 
-  public function getTransaksi($number,$offset){
+  public function getTransaksi(){
     $this->db->select("*");
-    // $this->db->join("categories", "products.category=categories.id");
+    $this->db->join("admin", "payment_transaction.id_admin=admin.id");
     $this->db->order_by("payment_transaction.id", "desc");
-    return $this->db->get("payment_transaction",$number,$offset);
+    return $this->db->get("payment_transaction");
   }
 
-  public function getTransaksiKasir($number,$offset,$id_admin){
+  public function getTransaksiKasir($id_admin){
     $this->db->select("*");
     $this->db->from("payment_transaction");
+    $this->db->join("admin", "payment_transaction.id_admin=admin.id");
     $this->db->where('payment_transaction.id_admin', $id_admin);
     $this->db->order_by("payment_transaction.id", "desc");
     return $this->db->get();
@@ -44,6 +45,9 @@ class Transaksi_model extends CI_Model {
   }
 
   public function getLaporan($tanggal_awal, $tanggal_akhir){
+    $this->db->select("*");
+    $this->db->join("admin", "payment_transaction.id_admin=admin.id");
+    $this->db->order_by("payment_transaction.id", "desc");
     $query = $this->db->get_where('payment_transaction', array('date>=' => $tanggal_awal, 'date<=' => $tanggal_akhir));
     // $this->db->order_by("payment_transaction.id", "desc");
     return $query->result_array();

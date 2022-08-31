@@ -49,8 +49,10 @@
             <th>Tanggal</th>
             <th>Total Harga</th>
             <th>Status</th>
+            <th>Kasir</th>
           </tr>
           <tr> 
+            <th> <hr/> </th>
             <th> <hr/> </th>
             <th> <hr/> </th>
             <th> <hr/> </th>
@@ -69,6 +71,7 @@
               <td><?= date('d-m-Y', strtotime($row['date'])) ?></td>
               <td><?= number_format($row['price'],0,'','.')  ?></td>
               <td><?= $row['status'] ?></td>
+              <td><?= $row['nama'] ?></td>
             </tr>
           <?php endforeach; ?>
 

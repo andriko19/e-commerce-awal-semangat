@@ -505,7 +505,7 @@
       }
 
       function listening_serch_product(params) {
-      $("#search").autocomplete({
+        $("#search").autocomplete({
           minLength: 1,
           delay: 400,
           source: function(request, response) {
@@ -682,7 +682,13 @@
         dataType: "json",
         success: function(result) {
           //cetak_struk();
+          var printPage = document.getElementById("content_struck").innerHTML;
+          var oriPage = document.body.innerHTML;
+          document.body.innerHTML = printPage;
           window.print();
+          document.body.innerHTML = oriPage;
+
+          // window.print();
           $('#modal_struck').modal('hide');
           reload_table();
           $('.res').val('');

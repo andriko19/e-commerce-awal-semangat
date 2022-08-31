@@ -42,6 +42,7 @@
 								<th>Tanggal</th>
 								<th>Total Harga</th>
 								<th>Status</th>
+								<th>Kasir</th>
 								<th style="width: 130px">Aksi</th>
 							</tr>
 						</thead>
@@ -56,6 +57,7 @@
 								<td><?= $data['date']; ?></td>
 								<td>Rp. <?= str_replace(",",".",number_format($data['price'])); ?></td>
 								<td><?= $data['status']; ?></td>
+								<td><?= $data['nama']; ?></td>
 								<td>
 									<a href="<?= base_url() ;?>administrator/detail_transaksi/<?= $data['id_nota']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
 								</td>
