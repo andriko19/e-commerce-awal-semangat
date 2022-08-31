@@ -71,7 +71,7 @@ class Transaksi_model extends CI_Model {
 
   public function get_id_nota()
   {
-    $q = $this->db->query("SELECT MAX(RIGHT(id,4)) AS kd_max FROM payment_transaction WHERE DATE(date)=CURDATE()");
+    $q = $this->db->query("SELECT MAX(RIGHT(id_nota,4)) AS kd_max FROM payment_transaction WHERE DATE(date)=CURDATE()");
     $kd = "";
     if($q->num_rows()>0){
         foreach($q->result() as $k){
