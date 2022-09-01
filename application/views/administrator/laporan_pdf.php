@@ -48,10 +48,12 @@
             <th>No. Nota</th>
             <th>Tanggal</th>
             <th>Total Harga</th>
+            <th>Total Qty</th>
             <th>Status</th>
             <th>Kasir</th>
           </tr>
           <tr> 
+            <th> <hr/> </th>
             <th> <hr/> </th>
             <th> <hr/> </th>
             <th> <hr/> </th>
@@ -70,6 +72,16 @@
               <td><?= $row['id_nota'] ?></td>
               <td><?= date('d-m-Y', strtotime($row['date'])) ?></td>
               <td><?= number_format($row['price'],0,'','.')  ?></td>
+              
+              <?php
+                $id_nota = $row['id_nota'];
+                $query =  $this->db->query('SELECT SUM(qty) AS total_qty
+                                  FROM payment_transaction_detail
+                                  WHERE id_nota = "'.$id_nota.'"');
+                $sql = $query->row_array();
+              ?>
+
+              <td><?= $sql['total_qty'] ?></td>
               <td><?= $row['status'] ?></td>
               <td><?= $row['nama'] ?></td>
             </tr>
