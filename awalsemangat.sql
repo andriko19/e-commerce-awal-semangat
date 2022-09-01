@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 15, 2022 at 11:41 AM
--- Server version: 10.3.35-MariaDB-cll-lve
--- PHP Version: 7.4.30
+-- Host: 127.0.0.1
+-- Generation Time: Sep 01, 2022 at 09:37 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sugarkop_awalsemangat`
+-- Database: `awalsemangat`
 --
 
 -- --------------------------------------------------------
@@ -30,17 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
+  `nama` varchar(100) DEFAULT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `cookie` varchar(100) NOT NULL
+  `cookie` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`, `cookie`) VALUES
-(1, 'admin', '$2y$10$pKGfQG2etJ5lDW06PZncIOqY94RJTioYG4oM4n0/Up.cUpnX5HkRO', 'i9BjkXpzH08tMZY1FeHFqozayn8jUU5xvAmY9vToEMg732XuhDtklfLhb7K5GdyJ');
+INSERT INTO `admin` (`id`, `nama`, `username`, `password`, `cookie`, `role`) VALUES
+(1, 'Super Admin', 'admin', '$2y$10$pKGfQG2etJ5lDW06PZncIOqY94RJTioYG4oM4n0/Up.cUpnX5HkRO', 'i9BjkXpzH08tMZY1FeHFqozayn8jUU5xvAmY9vToEMg732XuhDtklfLhb7K5GdyJ', 'admin'),
+(6, 'FINSYA', 'finsya', '$2y$10$J1szugVvuRNxi9xVeF/GAeEQZ4exHgEEOdXiJiW6hAyQ5LKHNYh7y', '', 'kasir');
 
 -- --------------------------------------------------------
 
@@ -250,7 +252,7 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id`, `user`, `invoice_code`, `label`, `name`, `email`, `telp`, `province`, `regency`, `district`, `village`, `zipcode`, `address`, `courier`, `courier_service`, `ongkir`, `total_price`, `total_all`, `date_input`, `status`, `resi`) VALUES
-(1, 1, '112782507', 'Rumah', 'Andrik', 'andrik.suprayitno@gmail.com', '083276543213', 11, 444, 'Benowo', 'Sememi', 60191, 'Sememi gang II no. 39', 'jne', 'CTC', '7000', 15000, 22000, '2020-10-21 11:11:47', 3, '112782507');
+(1, 1, '112782507', 'Rumah', 'Andrik', 'andrik.suprayitno@gmail.com', '083276543213', 11, 444, 'Benowo', 'Sememi', 60191, 'Sememi gang II no. 39', 'jne', 'CTC', '7000', 15000, 22000, '2020-10-21 11:11:47', 4, '112782507');
 
 -- --------------------------------------------------------
 
@@ -302,6 +304,58 @@ INSERT INTO `payment_proof` (`id`, `invoice`, `file`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment_transaction`
+--
+
+CREATE TABLE `payment_transaction` (
+  `id` int(11) NOT NULL,
+  `id_nota` varchar(50) NOT NULL DEFAULT '',
+  `date` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `price` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `id_admin` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_transaction`
+--
+
+INSERT INTO `payment_transaction` (`id`, `id_nota`, `date`, `price`, `status`, `id_admin`) VALUES
+(30, '3108220001', '2022-08-31 04:18:24', 10000, 'selesai', 6),
+(31, '3108220002', '2022-08-31 04:19:19', 30000, 'selesai', 6),
+(32, '0109220001', '2022-09-01 09:53:23', 30000, 'selesai', 6),
+(33, '0109220002', '2022-09-01 01:44:47', 20000, 'selesai', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_transaction_detail`
+--
+
+CREATE TABLE `payment_transaction_detail` (
+  `id` int(11) NOT NULL,
+  `id_nota` varchar(50) NOT NULL DEFAULT '',
+  `products_name` varchar(200) NOT NULL,
+  `price` int(100) NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_transaction_detail`
+--
+
+INSERT INTO `payment_transaction_detail` (`id`, `id_nota`, `products_name`, `price`, `qty`) VALUES
+(40, '3108220001', 'RedVelvet GreenTea', 10000, 1),
+(41, '3108220002', 'Special Oreo', 10000, 2),
+(42, '3108220002', 'Special GreenTea', 10000, 1),
+(43, '0109220001', 'Special Oreo', 10000, 1),
+(44, '0109220001', 'Special RedVelvet', 10000, 2),
+(45, '0109220002', 'Special RedVelvet', 10000, 1),
+(46, '0109220002', 'Special Choco', 10000, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -328,10 +382,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `price`, `stock`, `category`, `condit`, `weight`, `img`, `description`, `date_submit`, `publish`, `slug`, `transaction`, `promo_price`, `viewer`) VALUES
-(24, 'Salad Buah 500 gram', 15000, 9, 8, 1, 500, '1599792571421.JPG', '<p>Salad buah sari rasa kemasan 500 gram harga Rp.15.000.-</p>', '2020-09-11 09:49:31', 2, 'salad-buah-500-gram', 1, 0, 40),
+(24, 'Salad Buah 500 gram', 15000, 9, 8, 1, 500, '1599792571421.JPG', '<p>Salad buah sari rasa kemasan 500 gram harga Rp.15.000.-</p>', '2020-09-11 09:49:31', 2, 'salad-buah-500-gram', 1, 0, 43),
 (25, 'Salad Buah 400 gram', 10000, 10, 8, 1, 400, '1599792709869.JPG', '<p>Salad buah sari rasa kemasan 40 gram harga Rp.10.000.-</p>', '2020-09-11 09:51:49', 2, 'salad-buah-400-gram', 0, 0, 26),
 (26, 'Salad Buah 200 gram', 8000, 10, 8, 1, 200, '1599792806679.JPG', '<p>Salad buah sari rasa kemasan 200 gram harga Rp.8.000.-</p>', '2020-09-11 09:53:26', 2, 'salad-buah-200-gram', 0, 0, 25),
-(28, 'Choco RedVelvet', 10000, 10, 9, 1, 500, '1602042422512.JPG', 'Choco RedVelvet', '2020-10-07 10:47:02', 1, 'redvelvet-choco', 0, 0, 66),
+(28, 'Choco RedVelvet', 10000, 10, 9, 1, 500, '1602042422512.JPG', 'Choco RedVelvet', '2020-10-07 10:47:02', 1, 'redvelvet-choco', 0, 0, 67),
 (29, 'Special Oreo', 10000, 10, 9, 1, 500, '1602042569225.jpg', 'Special Oreo', '2020-10-07 10:49:29', 1, 'special-oreo', 0, 0, 43),
 (30, 'Special RedVelvet', 10000, 10, 9, 1, 500, '1602042764461.jpg', 'Special RedVelvet', '2020-10-07 10:52:44', 1, 'special-redvelvet', 0, 0, 37),
 (31, 'Special Choco', 10000, 10, 9, 1, 500, '1602042985585.JPG', 'Special Choco', '2020-10-07 10:56:25', 1, 'special-choco', 0, 0, 44),
@@ -347,7 +401,8 @@ INSERT INTO `products` (`id`, `title`, `price`, `stock`, `category`, `condit`, `
 (41, 'Brown Sugar Macchiato', 17500, 10, 9, 1, 500, '1602216009919.jpg', 'Brown Sugar Macchiato', '2020-10-09 11:00:09', 2, 'brown-sugar-macchiato', 0, 0, 40),
 (44, 'Lychee Yakult', 15000, 10, 9, 1, 500, '1602227117118.jpg', 'Lychee Yakult', '2020-10-09 14:05:17', 1, 'lychee-yakult', 0, 0, 67),
 (45, 'Strawberry Yakult', 15000, 50, 9, 1, 500, '1634112667671.png', '<p>Strawberry Yakult</p>', '2021-10-13 15:11:07', 1, 'strawberry-yakult', 0, 0, 9),
-(51, 'Special BubbleGum', 10000, 50, 9, 1, 500, '1655202054207.png', '<p>Special BubbleGum</p>', '2022-06-14 17:20:54', 1, 'special-bubblegum', 0, 0, 0);
+(51, 'Special BubbleGum', 10000, 50, 9, 1, 500, '1655202054207.png', '<p>Special BubbleGum</p>', '2022-06-14 17:20:54', 1, 'special-bubblegum', 0, 0, 1),
+(52, 'tesss', 12000, 12, 8, 1, 10, '1661152072066.JPG', '<p>tess aja</p>', '2022-08-22 14:07:52', 1, 'tesss', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -614,6 +669,18 @@ ALTER TABLE `payment_proof`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payment_transaction`
+--
+ALTER TABLE `payment_transaction`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_transaction_detail`
+--
+ALTER TABLE `payment_transaction_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -669,7 +736,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `banner`
@@ -681,13 +748,13 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `cod`
@@ -744,10 +811,22 @@ ALTER TABLE `payment_proof`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `payment_transaction`
+--
+ALTER TABLE `payment_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `payment_transaction_detail`
+--
+ALTER TABLE `payment_transaction_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `rekening`

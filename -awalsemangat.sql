@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 04 Sep 2020 pada 08.37
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 5.6.40
+-- Host: localhost:3306
+-- Generation Time: Jul 15, 2022 at 11:41 AM
+-- Server version: 10.3.35-MariaDB-cll-lve
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `awalsemangat`
+-- Database: `sugarkop_awalsemangat`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `cookie`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `admin` (`id`, `username`, `password`, `cookie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `banner`
+-- Table structure for table `banner`
 --
 
 CREATE TABLE `banner` (
@@ -55,19 +55,16 @@ CREATE TABLE `banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `banner`
+-- Dumping data for table `banner`
 --
 
 INSERT INTO `banner` (`id`, `img`, `url`) VALUES
-(8, '1587360658092.png', '#'),
-(9, '1587361271745.png', '#'),
-(10, '1587361440299.png', '#'),
-(12, '1587373573352.png', 'https://www.tokopedia.com/discovery');
+(15, '1602041618492.jpg', '#');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -83,17 +80,10 @@ CREATE TABLE `cart` (
   `ket` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `cart`
---
-
-INSERT INTO `cart` (`id`, `user`, `id_product`, `product_name`, `price`, `qty`, `img`, `slug`, `weight`, `ket`) VALUES
-(1, 1, 23, 'Salad Buah 500ml', 20000, 1, '1597743385257.jpg', 'salad-buah-500ml', 500, '');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -104,21 +94,17 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `icon`, `slug`) VALUES
-(2, 'Komputer', '1586455713976.png', 'komputer'),
-(3, 'Laptop', '1586456102899.png', 'laptop'),
-(4, 'Gadget', '1586457219046.png', 'gadget'),
-(6, 'Pakaian Pria', '1586527494296.png', 'pakaian-pria'),
-(7, 'Pakaian Wanita', '1586527510434.png', 'pakaian-wanita'),
-(8, 'Makanan', '1597743887720.png', 'makanan');
+(8, 'Makanan', '1597743887720.png', 'makanan'),
+(9, 'Minuman', '1599809761896.png', 'minuman');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cod`
+-- Table structure for table `cod`
 --
 
 CREATE TABLE `cod` (
@@ -127,7 +113,7 @@ CREATE TABLE `cod` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `cod`
+-- Dumping data for table `cod`
 --
 
 INSERT INTO `cod` (`id`, `regency_id`) VALUES
@@ -136,7 +122,7 @@ INSERT INTO `cod` (`id`, `regency_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cost_delivery`
+-- Table structure for table `cost_delivery`
 --
 
 CREATE TABLE `cost_delivery` (
@@ -146,7 +132,7 @@ CREATE TABLE `cost_delivery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `cost_delivery`
+-- Dumping data for table `cost_delivery`
 --
 
 INSERT INTO `cost_delivery` (`id`, `destination`, `price`) VALUES
@@ -156,7 +142,7 @@ INSERT INTO `cost_delivery` (`id`, `destination`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `email_send`
+-- Table structure for table `email_send`
 --
 
 CREATE TABLE `email_send` (
@@ -169,7 +155,7 @@ CREATE TABLE `email_send` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `footer`
+-- Table structure for table `footer`
 --
 
 CREATE TABLE `footer` (
@@ -179,7 +165,7 @@ CREATE TABLE `footer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `footer`
+-- Dumping data for table `footer`
 --
 
 INSERT INTO `footer` (`id`, `page`, `type`) VALUES
@@ -198,7 +184,7 @@ INSERT INTO `footer` (`id`, `page`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grosir`
+-- Table structure for table `grosir`
 --
 
 CREATE TABLE `grosir` (
@@ -211,7 +197,7 @@ CREATE TABLE `grosir` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `img_product`
+-- Table structure for table `img_product`
 --
 
 CREATE TABLE `img_product` (
@@ -221,7 +207,7 @@ CREATE TABLE `img_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `img_product`
+-- Dumping data for table `img_product`
 --
 
 INSERT INTO `img_product` (`id`, `id_product`, `img`) VALUES
@@ -232,7 +218,7 @@ INSERT INTO `img_product` (`id`, `id_product`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice`
+-- Table structure for table `invoice`
 --
 
 CREATE TABLE `invoice` (
@@ -259,10 +245,17 @@ CREATE TABLE `invoice` (
   `resi` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id`, `user`, `invoice_code`, `label`, `name`, `email`, `telp`, `province`, `regency`, `district`, `village`, `zipcode`, `address`, `courier`, `courier_service`, `ongkir`, `total_price`, `total_all`, `date_input`, `status`, `resi`) VALUES
+(1, 1, '112782507', 'Rumah', 'Andrik', 'andrik.suprayitno@gmail.com', '083276543213', 11, 444, 'Benowo', 'Sememi', 60191, 'Sememi gang II no. 39', 'jne', 'CTC', '7000', 15000, 22000, '2020-10-21 11:11:47', 3, '112782507');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pages`
+-- Table structure for table `pages`
 --
 
 CREATE TABLE `pages` (
@@ -273,7 +266,7 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pages`
+-- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `title`, `content`, `slug`) VALUES
@@ -289,7 +282,7 @@ INSERT INTO `pages` (`id`, `title`, `content`, `slug`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `payment_proof`
+-- Table structure for table `payment_proof`
 --
 
 CREATE TABLE `payment_proof` (
@@ -299,10 +292,17 @@ CREATE TABLE `payment_proof` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `payment_proof`
+--
+
+INSERT INTO `payment_proof` (`id`, `invoice`, `file`, `status`) VALUES
+(1, '112782507', '1603253676455.jpg', 1);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -324,26 +324,35 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `title`, `price`, `stock`, `category`, `condit`, `weight`, `img`, `description`, `date_submit`, `publish`, `slug`, `transaction`, `promo_price`, `viewer`) VALUES
-(1, 'OPPO A91 8/128GB Special Online Edition', 3699000, 15, 4, 1, 300, '1586699074281.jpg', 'Dimensions/Weight\r\nHeight: 160.2mm\r\nWidth: 73.3mm\r\nThickness: 7.9mm\r\nWeight: Approx. 172g\r\n\r\nBasic Parameters\r\nColor: Lightening Black, Unicorn White\r\nOperating System: ColorOS 6.1.2, based on Android 9\r\nCPU: Helio P70\r\nGPU: ARM Mali G72 MP3 900MHz\r\nBattery Capacity: 4000mAh (Standard Value)\r\nRAM:8GB\r\nStorage: 128GB\r\nVOOC Flash Charge: 3.0\r\n\r\nDisplay\r\nSize: 16.2cm(6.4\'\')\r\nTouchscreen: Multi-touch, Capacitive Screen\r\nResolution: 2400 by 1080 pixels at 408 ppi\r\nColors: 16 million colors\r\nScreen Ratio: 90.7%\r\nContrast: 1000000:1\r\nType: AMOLED\r\nBrightness: Typical Value 430nit\r\n\r\nCamera\r\nRear Sensor: 48MP & 8MP & 2MP & 2MP\r\nFront Sensor: 16MP\r\nFlash: LED Flash\r\nAperture :\r\nFront: f/2.0;\r\nRear: Main f/1.79, Wide Angle f/2.25, Portrait & Mono f/2.4\r\nSensor Size:\r\nMain 1/2.25\', 0.8um\r\nSecondary Wide Angle 1/4\', 1.12um 2M 1/5\', 1.75um\r\nPixel Size: 1/3.1\', 1.0um\r\nCamera Mode: Photo, video, professional mode, panorama, portrait, night scene, time-lapse photography, slow motion, etc.\r\nVideo: Rear Camera Defualt: 1080P@30fps; Front Camera Default: 720P@30fps\r\nConnectivity\r\n\r\nFrequencies:\r\n[Frequency 1]\r\nGSM: 850/900/1800/1900MHz\r\nWCDMA: Bands 1/5/8\r\nFDD-LTE: Bands 1/3/5/8\r\nTD-LTE: Bands 38/40/41\r\n[Frequency 2]\r\nGSM: 850/900/1800/1900MHz\r\nWCDMA: Bands 1/5/8\r\nFDD-LTE: Bands 1/3/5/7/8\r\nTD-LTE: Bands 38/40/41\r\n[Frequency 3]\r\nGSM: 850/900/1800/1900MHz\r\nWCDMA: 850/900/1700/1900/2100MHz\r\nFDD-LTE: 700/800/850/900/1700/1800/1900/2100/2600MHz\r\nTD-LTE: 1900/2000/2300/2496-2690/2570-2620MHz\r\nSIM Card Type: Nano-SIM / Nano-USIM\r\nGPS: Built-in GPS; supports A-GPS, Beidou, Glonass\r\nBluetooth: 4.2\r\nWLAN Function: 2.4/5GHz 802.11 a/b/g/n/ac\r\nOTG: Supported\r\n\r\nIn the Box\r\nHandset *1    \r\nHeadset *1    \r\nUSB Cable *1    \r\nAdapter *1    \r\nSIM Card Pin *1    \r\nProtective Case *1    \r\nProtective Film, pre-applied *1\r\nQuick Guide *1    \r\nWarranty Card *1 ', '2020-04-12 20:43:52', 1, 'oppo-a91-8128gb-special-online-edition', 2, 3200000, 49),
-(2, 'Black Shark 2 Pro 8GB/128GB Include Rookie Kit - Iceberg Grey', 7499000, 8, 4, 1, 450, '1586623271686.jpg', 'Processor & GPU\r\nQualcomm® Snapdragon™ 855+, 2.96GHz (Qualcomm® Snapdragon™ premium-tier processor)\r\nQualcomm® Adreno™ 640\r\n\r\nRAM & ROM\r\n8GB RAM 128GB ROM\r\n\r\nDimension\r\nHeight: 163.61mm\r\nDepth: 8.77mm (10.07mm at the thickest point)\r\nWidth: 75.01 mm\r\nWeight: 205g\r\n\r\nBattery & Charging\r\n4000mAh(typ)/3900mAh(min)\r\nNon-removable\r\nHandset supports QC4+, 27W/18W. Charger supports QC3.0 (Qualcomm® Quick Charge™ )\r\nStandard USB Type-C\r\n\r\nCamera & Video\r\nRear Cameras\r\nMain?48M 0.8µm (48MP 4in1 PDAF f1.75)\r\nAperture: f/1.75\r\n6p lens\r\nLED flash\r\nSecondary: 12M 1.0µm (12MP PDAF f2.2 ?1.0µm)\r\nAperture: f/2.2\r\n6p lens (2x optical zoom lens)\r\nSupport PDAF / low-light enhancement technology / HDR / portrait photography / panorama / AI camera / super night mode\r\nFront Camera, FF 20M 0.9µm 4in1 Aperture: f/2.0 5p lens\r\n\r\nDisplay\r\n6.39 inch AMOLED\r\n19.5:9 Full screen display\r\n430nit(typ) High brightness (10% lower brightness with DC Dimming)\r\nResolution:1080 × 2340, 403PPI, Contrast Ratio ?60000:1\r\nSupports DCI?P3 108.9%(typ)\r\n\r\nConnectivity\r\nDual nano SIM\r\nTD LTE?FDD LTE?TD?SCDMA?WCDMA?CDMA?GSM\r\nSupports wifi: 802.11a/b/g/n/ac; 2.4G&5.0G\r\nSupports 2*2 mimo, MU MIMO\r\nSupports WIFI Display, WFI Direct, WIFI hotspot\r\nSupports Bluetooth 5.0 wireless, supports aptX & aptX HD & aptX Adaptive & LDAC\r\n\r\nFingerprint & Recognization\r\nVirtual Keys: Recent, HOME, Back\r\nSupports full-screen operation; Supports intelligent dock & game Dock\r\nShark Key to enter Sharkspace\r\n\r\nSensors\r\nGravity sensor, Ambient light sensor, Proximity sensor, Gyroscope, Compass, fingerprint sensor, display touch sensitivity sensor\r\n\r\nKelengkapan dalam paket:\r\n1x Smartphone\r\n1x Rookie Kit (Gamepad Left + Holder 2.0 Left)\r\n1x Power Adapter\r\n1x USB Cable\r\n1x Transparent Protective Case\r\n1x Manual Book\r\n1x Warranty Card\r\n1x Black Shark Sticker\r\n1x SIM Tray Ejector\r\n1x Type-C to 3.5mm Audio Jack Adapter\r\n1x Free Perdana Smartfren', '2020-04-11 18:41:11', 1, 'black-shark-2-pro-8gb128gb-include-rookie-kit-iceberg-grey', 2, 7000000, 77),
-(3, 'AMD Paket PC Desktop Gaming Rakitan || Terbatas', 4050000, 2, 2, 2, 12000, '1586699592182.jpg', 'Komputer rakitan\r\nDilengkapi dengan aplikasi game menarik\r\nHdd 500\r\nSSD 240GB\r\nRam 8GB DDR 4', '2020-04-12 15:53:12', 1, 'amd-paket-pc-desktop-gaming-rakitan-terbatas', 0, 3500000, 58),
-(4, 'Laptop Termurah Terlaris Dell Latitude E6410 Core i5', 1950000, 10, 3, 2, 1000, '1586700041867.jpg', 'Ready Laptop Dell Latitude E6410\r\nLaptop ini sangat cocok untuk agan yang sedang mencari Laptop dengan Budget Minimal namun mendapatkan Laptop yang Maksimal\r\nTidak perlu diragukan lagi Laptop Dell ini mempunyai daya tahan Material Terbaik\r\n\r\nSpesifikasi :\r\n- Core i5 2.5GHz\r\n- Ram DDR3 4GB\r\n- Hdd 250GB\r\n- Layar 14” inchi\r\n- Webcam\r\n- DVD RW\r\n- Lan Port\r\n- Wifi\r\n- VGA Port\r\n- USB Port\r\n- Windows 7 Pro 64bit\r\n- Office 2013, Winrar, UltraISO, Dll\r\n--------------------\r\nGaransi 1 Bulan\r\n--------------------\r\nKelengkapan :\r\n- Laptop Dell Latitude E6410 Second 93% sd 95%\r\n- Baterai\r\n- Adaptor\r\n- Tas New Slempang\r\n--------------------\r\nHarga : Rp. 1.950.000\r\n--------------------\r\nKondisi :\r\n- Mesin OK 100% Siap Bekerja Keras\r\n- Body Laptop Overall 95% Second Mulus\r\n- Layar Jernih OK 100%\r\n- Keyboard OK 100%\r\n- Sound OK 100%\r\n- Webcam OK 100%\r\n- VGA OK 100%\r\n- USB OK 100%\r\n- LAN Card OK 100%\r\n- SD Card Reader OK 100%\r\nLulus QC khas betet89 100% Maknyus Istimiwir barangnya\r\n--------------------\r\nbetet89 Spesialis Laptop Second Built Up Original \r\nBergaransi, Jujur, dan Amanah sejak 2009\r\nReseller Welcome, harga pasti masuk', '2020-04-12 16:00:41', 1, 'laptop-termurah-terlaris-dell-latitude-e6410-core-i5', 0, 1500000, 54),
-(5, 'KEMEJA CORDUROY “SIMUGI”', 153000, 210, 6, 1, 60, '1586700289565.jpg', 'Reggo memiliki dua jenis kemeja corduroy, dimana perbedaannya terdapat pada tekstur bahannya.\r\nDapat kalian pilih di pilihan varian warna ya.\r\nKarena terbagi dua kelompok, ada beberapa warna yang bertekstur halus dan warna lainnya memiliki tekstur standar corduroy.\r\n__________________\r\n\r\nStatus : Ready Stock\r\n\r\nKode Barang : SIMUGI\r\n\r\nTersedia Size : M, L dan XL\r\n\r\nDetail Size :\r\n\r\nM ( P 73cm x 53cm )\r\nL ( P 75cm x 56cm )\r\nXL ( 78cm x 60cm))\r\n\r\nBahan : Corduroy', '2020-04-12 16:04:49', 1, 'kemeja-corduroy-simugi', 0, 100000, 15),
-(6, 'LAPTOP ASUS X541S X0632T N3000| RAM 4GB HDD 500GB|15.6\"|DVDRW|WINDOWS 10 ORIGINAL', 4300000, 12, 3, 1, 3000, '1586700419708.jpg', 'SPESIFIKASI : \r\nNotebook : Asus X541SA-X0632T \r\nProcessor : Intel®  Celeron® N3000 CPU  @ 1.04 GHz ( 2C,2T) \r\nRAM : 1X4096 MB DDR3 (4 GB PC3L 12800) ONBOARD \r\nHarddisk : 500 GB \r\nKamera : HD Web Camera \r\nVGA : Intel® UHD Graphics 600, Dedicated 128 MB, Shared 1993 MB, Up to 2121 MB \r\nBaterai : 3 Cell LI-ion 3350 mAh \r\nFitur : BT, WiFi, DVD Super Multi, Web Cam,Card Reader,1 Port USB 2.0 ,1 Port USB 3.0 ,1 Port USB 3.1 Type C,HDMI,Realtek PCIe FE Family Controller (RJ45) \r\nLayar : 15.6 HD SLIM (1366X768) \r\nWarna : Black \r\nOperation System (OS) : Windows 10 Home Single Language 64-Bit \r\nGaransi : 1 Tahun \r\n\r\n\r\n\r\nFITUR :\r\n- DVD Super Multi DL Drive ( DVDRW )\r\n- Card Reader 3 in 1\r\n- Bluetooth\r\n- HD Web Camera\r\n- 3 Cell LI-ion 19V 100-240-50-60 Hz\r\n- Webcam, Cardreader,1 port USB 3.0,1 port USB 2.0,1 port usb 3.1 type C, HDMI, Vga Out\r\n- Warna Hitam\r\n\r\n** BONUS :\r\nTas Laptop\r\n\r\n** KELENGKAPAN :\r\n- Unit + Dus Lengkap\r\n- Charger\r\n- Buku Manual\r\n- Buku Garansi', '2020-04-12 16:06:59', 1, 'laptop-asus-x541s-x0632t-n3000-ram-4gb-hdd-500gb156dvdrwwindows-10-original', 0, 4000000, 39),
-(8, 'Baju Gamis Syari Wanita Dewasa Lebaran Kekinian Pakaian Jubah Arab Muslim Muslimah', 156000, 28, 7, 1, 650, '1586791476018.jpeg', 'Assalamualaikum\r\nDapatkan harga TERMURAH tanpa syarat apapun\r\nDetail Produk\r\nBahan Moscrepe mix renda import plus khimar\r\nUkuran : All size fit to L\r\nLd 100-102 cm\r\nPanjang 135-137 cm\r\nToleransi ukuran 1-2 cm\r\n\r\n*PENTING :\r\n-Pastikan alamat yang di tulis ketika checkout diisi dengan sangan LENGKAP guna menghindari kendala pengiriman oleh kurir (Sertakan patokan bila perlu)\r\n-Pastikan nomor HP yang diisi dalam alamat ketika checkout mudah dihubungi (Tlp. & Sms) / (Sertakan 2 Nomor Hp bila perlu)\r\n\r\n\r\nHarga murah kualitas bahan dijammin bagus\r\nStock Barang Aman Jadi Cocok Buat Kamu Yang Jadi RESELLER atau suka sebagai DROPSHIPER\r\nKecepatan pengiriman baik\r\n\r\n\r\nReseller and Dropshiper wlocome\r\nGambar untuk referensi\r\nTingkat kemiripan 85 - 90%', '2020-04-13 17:24:36', 1, 'baju-gamis-syari-wanita-dewasa-lebaran-kekinian-pakaian-jubah-arab-muslim-muslimah', 2, 10000, 26),
-(9, 'Baju Batik Pria Lengan Panjang Kemeja Seragam Kantor Busana Muslim Cowok', 118000, 20, 6, 1, 408, '1586792245831.jpg', 'KEMEJA PAGAR BUNGA\r\nEXCLUSIVE DAN MEWAH\r\n\r\nBAHAN KATUN PRIMA\r\n\r\nLINGKAR DADA KEMEJA PANJANG DAN PENDEK\r\nM= 104cm\r\nL= 108cm\r\nXL= 112cm\r\nXXL= 120cm', '2020-04-13 17:37:25', 1, 'baju-batik-pria-lengan-panjang-kemeja-seragam-kantor-busana-muslim-cowok', 0, 0, 5),
-(10, 'Asus Zenfone MAX M1 ZB555KL Smartphone [32GB/ 3GB/ L]', 1260000, 12, 4, 1, 430, '1586960622849.jpg', '<h2>Asus Zenfone MAX M1 ZB555KL Smartphone [32GB/ 3GB/ L]</h2><p>&nbsp;</p><h2>Merasakan Pengalaman Layar Full View 5.5 Inch</h2><p>Asus Zenfone Max M1 merupakan smartphone yang sengaja dirancang untuk memenuhi lifestyle&nbsp;pengguna. Dibuktikan dengan desain smartphone yang kelihatan apik berikut dengan tampilan full view display 5.5 inch. Bahkan dengan jenis layar yang sekarang Asus mengklaim nantinya Anda dapat menikmati peningkatan level gambar saat menikmati berbagai konten foto dan video. Apalagi layar HD Asus Max M1 kabarnya sudah menggunakan jenis kaca 2.5D beresolusi HD Plus. Selain itu, tersedianya Triple Slot yang mana nantinya Anda bisa menumpangi dua kartu SIM yang mendukung di jaringan 4G LTE. Ada lagi satu slot untuk MicroSD untuk penyimpanan hingga 256GB.&nbsp;</p><figure class=\"image\"><img src=\"https://i.imgur.com/JzH6nV4.jpg\" alt=\"\"></figure><h2>Video Unboxing Asus Zenfone Max M1 Indonesia</h2><p><a href=\"https://youtu.be/YQ7MZxRTCVY\">https://youtu.be/YQ7MZxRTCVY</a></p><h2>Asus Hadirkan Desain Smartphone Ultra Slim&nbsp;</h2><p>Meski tidak terlalu besar hanya seukuran 5.5” Asus merancang bingkai ultraslim sehingga membuatnya lebih ergonomis saat digenggam. Ditambah lagi dengan sentuhan akhir berbalut warna metalik yang menjadikan Zenfone Max M1 terkesan lebih Premium. Bahkan pilihan warna yang disediakan oleh sang produsen juga cukup beragam diantaranya Deepsea Black, Sunlight Gold, Ruby Red. Kesempurnaan Asus ZB555KL semakin lengkap berkat hadirnya Fingerprint Sensor yang diterapkan pada bagian belakang handphone. Hebatnya lagi, kecepatan pemindai sidik jarinya terbilang cukup intuitif saat digunakan untuk membuka kunci layar.&nbsp;</p><figure class=\"image\"><img src=\"https://i.imgur.com/MMrwiKC.jpg\" alt=\"\"></figure><h2>Interface yang Baru ZenUI 5.0 &amp; Android 8.0</h2><p>Untuk melengkapi debut smartphone terbarunya, Asus Zenfone Max M1 dibekali dengan Android Oreo beserta dengan antarmuka terbaru ZenUI 5.0. Hasilnya Anda dapat merasakan pengalaman baru yang lebih menarik, mudah dan intuitif. Tidak cukup dengan itu, dibagian dalam Asus Zenfone Max M1 ditenagai dengan platform Qualcomm Snapdragon yang lebih cepat dan responsif. Bahkan untuk mengimbanginya, Asus menyandingkan GPU Adreno dan RAM yang cukup untuk hasilkan kualitas grafis bebas<i>&nbsp;‘lag’</i> kala bermain game atau memuat konten multimedia lainnya. &nbsp;</p><figure class=\"image\"><img src=\"https://i.imgur.com/thjKsuy.jpg\" alt=\"\"></figure><p>&nbsp;</p><h2>Kamera 13MP Asus Zenfone Max M1: Lebar dan Jernih</h2><p>Dengan iming-iming sistem dual kamera yang baru maka hasil fotonya tentu semakin menawan. Berbekal kamera utama 13 MP dengan kelengkapan aperture lensa F2.0 memungkinkan Anda motret dengan sudut pandang selebar 120 derajat. Begitupun dengan kemampuan rekam videonya yang memungkinkan menangkap lebih banyak objek / pemandangan yang memukau. Kemampuan lain yang dimiliki kamera smartphone Asus Zenfone Max M1 yakni fase autofukos yang hampir mirip dengan pendeteksian kamera DSLR. Akurasi fokusnya mencapai 0.03 detik untuk mendapatkan foto yang detail dan tajam. Begitupun dengan kamera depan Zenfone Max M1 yang disokong dengan teknologi Camera PixelMaster guna mendapatkan hasil yang lebih bening dan jernih saat selfie atau video call. &nbsp;</p><figure class=\"image\"><img src=\"https://i.imgur.com/Qpk1Fem.jpg\" alt=\"\"></figure><h2>Manajemen Baterai Cerdas Asus PowerMaster</h2><p>Kali ini Asus sekaligus memperkenalkan teknologi Asus PowerMaster sebagai dukungan manajemen daya yang cerdas. Teknologi ini diupayakan untuk mengoptimalkan masa pakai baterai tanpa harus mengesampingkan keamanan dan kinerja smartphone Asus Max M1. Sehubung dengan kapasitas baterainya sebesar 4000 mAh, maka sepantasnya Asus menawarkan fitur pengisian daya cepat / fast charging. Pengguna hanya membutuhkan waktu kurang lebih 3 jam untuk mendapatkan baterai smartphone yang terisi penuh. Dengan catatan sebaiknya Anda melakukan charging menggunakan adaptor yang bersertifikat (original), sehingga keamanan arus tetap stabil dan menghindari tegangan berlebih.&nbsp;</p><figure class=\"image\"><img src=\"https://i.imgur.com/a2nXsuc.jpg\" alt=\"\"></figure><p>&nbsp;</p>', '2020-04-15 16:23:43', 1, 'asus-zenfone-max-m1-zb555kl-smartphone-32gb-3gb-l', 0, 0, 46),
-(22, 'KAMI. Yarra Print Scarf Nuvoile Aster Jilbab Segiempat', 192000, 23, 7, 1, 100, '1587463636401.jpg', '<p>KAMI. Yarra Print Scarf Nuvoile Aster Jilbab Segiempat adalah kerudung segiempat berbahan Nuvoile yang didesain comfy dalam patterned dan mudah diatur sehingga nyaman saat digunakan. Ukuran : 115x115 cm</p>', '2020-04-21 12:07:16', 1, 'kami-yarra-print-scarf-nuvoile-aster-jilbab-segiempat', 0, 0, 102),
-(23, 'Salad Buah 500ml', 20000, 10, 8, 1, 500, '1597743385257.jpg', '<p>Salad buah di jamin puas karena dibuat menggunakan cinta.</p>', '2020-08-18 16:36:25', 1, 'salad-buah-500ml', 0, 5000, 5);
+(24, 'Salad Buah 500 gram', 15000, 9, 8, 1, 500, '1599792571421.JPG', '<p>Salad buah sari rasa kemasan 500 gram harga Rp.15.000.-</p>', '2020-09-11 09:49:31', 2, 'salad-buah-500-gram', 1, 0, 40),
+(25, 'Salad Buah 400 gram', 10000, 10, 8, 1, 400, '1599792709869.JPG', '<p>Salad buah sari rasa kemasan 40 gram harga Rp.10.000.-</p>', '2020-09-11 09:51:49', 2, 'salad-buah-400-gram', 0, 0, 26),
+(26, 'Salad Buah 200 gram', 8000, 10, 8, 1, 200, '1599792806679.JPG', '<p>Salad buah sari rasa kemasan 200 gram harga Rp.8.000.-</p>', '2020-09-11 09:53:26', 2, 'salad-buah-200-gram', 0, 0, 25),
+(28, 'Choco RedVelvet', 10000, 10, 9, 1, 500, '1602042422512.JPG', 'Choco RedVelvet', '2020-10-07 10:47:02', 1, 'redvelvet-choco', 0, 0, 66),
+(29, 'Special Oreo', 10000, 10, 9, 1, 500, '1602042569225.jpg', 'Special Oreo', '2020-10-07 10:49:29', 1, 'special-oreo', 0, 0, 43),
+(30, 'Special RedVelvet', 10000, 10, 9, 1, 500, '1602042764461.jpg', 'Special RedVelvet', '2020-10-07 10:52:44', 1, 'special-redvelvet', 0, 0, 37),
+(31, 'Special Choco', 10000, 10, 9, 1, 500, '1602042985585.JPG', 'Special Choco', '2020-10-07 10:56:25', 1, 'special-choco', 0, 0, 44),
+(32, 'Special Cappucino', 10000, 10, 9, 1, 500, '1602043296358.JPG', 'Special Cappucino', '2020-10-07 11:01:36', 1, 'special-cappucino', 0, 0, 34),
+(33, 'Chappucino Choco', 10000, 10, 9, 1, 500, '1602043434326.JPG', 'Chappucino Choco', '2020-10-07 11:03:54', 1, 'chappucino-choco', 0, 0, 36),
+(34, 'Special GreenTea', 10000, 10, 9, 1, 500, '1602043597685.JPG', 'Special GreenTea', '2020-10-07 11:06:37', 1, 'special-greentea', 0, 0, 30),
+(35, 'RedVelvet GreenTea', 10000, 10, 9, 1, 500, '1602043761469.JPG', 'RedVelvet GreenTea', '2020-10-07 11:09:21', 1, 'redvelvet-greentea', 0, 0, 29),
+(36, 'GreenTea Choco', 10000, 10, 9, 1, 500, '1602043886130.JPG', 'GreenTea Choco', '2020-10-07 11:11:26', 1, 'greentea-choco', 0, 0, 45),
+(37, 'Special Taro', 10000, 10, 9, 1, 500, '1602044016978.JPG', 'Special Taro', '2020-10-07 11:13:36', 1, 'special-taro', 0, 0, 28),
+(38, 'Choco Nutella', 15000, 10, 9, 1, 500, '1602044164151.JPG', 'Choco Nutella', '2020-10-07 11:16:04', 1, 'choco-nutella', 0, 0, 23),
+(39, 'Taro Choco', 10000, 10, 9, 1, 500, '1602044290781.JPG', 'Taro Choco', '2020-10-07 11:18:10', 1, 'taro-choco', 0, 0, 67),
+(40, 'Manggo Yakult', 15000, 10, 9, 1, 500, '1602215863742.JPG', 'Manggo Yakult', '2020-10-09 10:57:43', 1, 'manggo-yakult', 0, 0, 50),
+(41, 'Brown Sugar Macchiato', 17500, 10, 9, 1, 500, '1602216009919.jpg', 'Brown Sugar Macchiato', '2020-10-09 11:00:09', 2, 'brown-sugar-macchiato', 0, 0, 40),
+(44, 'Lychee Yakult', 15000, 10, 9, 1, 500, '1602227117118.jpg', 'Lychee Yakult', '2020-10-09 14:05:17', 1, 'lychee-yakult', 0, 0, 67),
+(45, 'Strawberry Yakult', 15000, 50, 9, 1, 500, '1634112667671.png', '<p>Strawberry Yakult</p>', '2021-10-13 15:11:07', 1, 'strawberry-yakult', 0, 0, 9),
+(51, 'Special BubbleGum', 10000, 50, 9, 1, 500, '1655202054207.png', '<p>Special BubbleGum</p>', '2022-06-14 17:20:54', 1, 'special-bubblegum', 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rekening`
+-- Table structure for table `rekening`
 --
 
 CREATE TABLE `rekening` (
@@ -354,7 +363,7 @@ CREATE TABLE `rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `rekening`
+-- Dumping data for table `rekening`
 --
 
 INSERT INTO `rekening` (`id`, `rekening`, `name`, `number`) VALUES
@@ -365,7 +374,7 @@ INSERT INTO `rekening` (`id`, `rekening`, `name`, `number`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `settings`
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
@@ -379,16 +388,16 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `settings`
+-- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`id`, `promo`, `promo_time`, `short_desc`, `address`, `regency_id`, `verify`) VALUES
-(1, 0, '2020-08-20T17:03', 'Buntomart adalah sebuah situs toko online mudah dan terpercaya. Kami memiliki toko fisik yang bisa Anda kunjungi. Disini jual beragam komputer, gadget, serta pakaian pria dan wanita', 'Jl. Raya Benowo.', 444, 1);
+(1, 0, '2020-08-20T17:03', 'Awal Semangat adalah sebuah situs toko online mudah dan terpercaya. Kami memiliki toko fisik yang bisa Anda kunjungi. Disini jual beragam makanan dan minuman.', 'Jl. Raya Benowo.', 444, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sosmed`
+-- Table structure for table `sosmed`
 --
 
 CREATE TABLE `sosmed` (
@@ -399,7 +408,7 @@ CREATE TABLE `sosmed` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sosmed`
+-- Dumping data for table `sosmed`
 --
 
 INSERT INTO `sosmed` (`id`, `name`, `icon`, `link`) VALUES
@@ -411,7 +420,7 @@ INSERT INTO `sosmed` (`id`, `name`, `icon`, `link`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subscriber`
+-- Table structure for table `subscriber`
 --
 
 CREATE TABLE `subscriber` (
@@ -422,17 +431,34 @@ CREATE TABLE `subscriber` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `subscriber`
+-- Dumping data for table `subscriber`
 --
 
 INSERT INTO `subscriber` (`id`, `email`, `date_subs`, `code`) VALUES
 (0, 'Semua Email', '2020-04-21 13:59:23', ''),
-(1, 'andrik.suprayitno@gmail.com', '2020-08-18 14:45:19', '159773671919791');
+(1, 'andrik.suprayitno@gmail.com', '2020-08-18 14:45:19', '159773671919791'),
+(2, 'andriksuprayitno@uwp.ac.id', '2020-10-21 10:19:36', '160325037627002102'),
+(3, 'andriksuprayitno@uwp.ac.id', '2021-10-13 09:58:59', '16340939391229825071'),
+(4, 'andriksuprayitno@uwp.ac.id', '2021-10-13 11:18:17', '1634098697387652827'),
+(5, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:08:35', '16341017151856414216'),
+(6, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:12:50', '16341019702020349256'),
+(7, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:15:04', '16341021042016177546'),
+(8, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:19:35', '1634102375652762295'),
+(9, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:21:43', '16341025031017733104'),
+(10, 'andriksuprayitno@gmail.com', '2021-10-13 12:26:54', '16341028141771909497'),
+(11, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:28:44', '16341029241011665526'),
+(12, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:40:48', '16341036482048304155'),
+(13, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:43:37', '16341038172007858470'),
+(14, 'andrisuprayitno@uwp.ac.id', '2021-10-13 12:46:05', '1634103965563204976'),
+(15, 'andriksuprayitno@uwp.ac.id', '2021-10-13 12:46:39', '16341039991420601966'),
+(16, 'mutini002002@gmail.com', '2021-10-13 12:49:40', '163410418026088215'),
+(17, 'andriksuprayitno@uwp.ac.id', '2021-10-13 13:13:28', '1634105608172456721'),
+(18, 'ajengraka035@gmail.com', '2022-07-14 10:05:41', '16577679411141389295');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `testimonial`
+-- Table structure for table `testimonial`
 --
 
 CREATE TABLE `testimonial` (
@@ -443,21 +469,19 @@ CREATE TABLE `testimonial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `testimonial`
+-- Dumping data for table `testimonial`
 --
 
 INSERT INTO `testimonial` (`id`, `name`, `photo`, `content`) VALUES
-(1, 'Aliyah Wati - Jakarta', '', 'Sist makasih barangnya udah sampe, bagus dan lucu2. Temenku aja pada ngiri. Semoga sukses selalu buat eveshopashopnya. Sory baru bisa kasih kabar.'),
 (2, 'Een Enarsih - Banten', '', 'Sis barang ny dh sya trima,mkasih bnyak untuk layan’n ny sngat m’muaskan untuk sya,smu prtanya’n di jwab…\r\nRespon ny jga sngat baek,smoga usaha ny smakin brkembang'),
 (3, 'Ayung Darma - Pekalongan', '', 'Oia mf sis,Nich brg nya brsan aja ampe, mksh ya\r\nBrg nya bgs banget, sesuai yg digambarnya, makasih ya'),
-(4, 'Via Garolita - Cimahi', '', 'Sistaaaa……\r\nbaju nyaa udah smpee…\r\nbguss dechh…suka bgt…\r\nmaaksiih yaa'),
-(5, 'Dewanti - Solo', '', 'Barang tidak mengecewakan.. cs nya fast respon, resi besoknya langsung di share tanpa kita tanya.. mantap tokohijabku'),
+(5, 'Dewanti - Solo', '', 'Barang tidak mengecewakan.. cs nya fast respon, resi besoknya langsung di share tanpa kita tanya.. mantap awal semangat'),
 (6, 'Dina - Malang', '', 'Respon cs baik, tapi untuk pengirimannya agak lama, padahal pakai ekspedisi ”sicepat”\r\nharusnya bisa cepat sampainya.');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaction`
+-- Table structure for table `transaction`
 --
 
 CREATE TABLE `transaction` (
@@ -472,10 +496,17 @@ CREATE TABLE `transaction` (
   `img` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`id`, `id_invoice`, `user`, `product_name`, `price`, `qty`, `slug`, `ket`, `img`) VALUES
+(1, 112782507, 1, 'Salad Buah 500 gram', 15000, 1, 'salad-buah-500-gram', '', '1599792571421.JPG');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -493,271 +524,272 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `date_register`, `is_activate`, `token`, `token_reset`, `cookie`, `photo_profile`) VALUES
-(1, 'Andrik', 'andrik', 'andrik.suprayitno@gmail.com', '$2y$10$CO.bE7K7vQj1pqtbGWx5eOJO1qtQMSg/yc1qdFadOsgcZgFR4RFLu', '2020-08-18 14:45:19', 1, 'e6fffc104fe98b8a2191863cf132f72e15ae2c72', '', '', '1597740625861.jpg');
+(1, 'Andrik', 'andrik', 'andrik.suprayitno@gmail.com', '$2y$10$CO.bE7K7vQj1pqtbGWx5eOJO1qtQMSg/yc1qdFadOsgcZgFR4RFLu', '2020-08-18 14:45:19', 1, 'e6fffc104fe98b8a2191863cf132f72e15ae2c72', '', '', '1597740625861.jpg'),
+(17, 'Raka Ajeng Pertiwi Lubis ', 'raka-ajeng-pertiwi-lubis', 'ajengraka035@gmail.com', '$2y$10$ZAv4JCQZ3V1yaNGOs0ljgeo9iS3kSDVDtLIwBwWG1GEUwIVSWNp7y', '2022-07-14 10:05:41', 0, '1b1c2c13d7cbc1234925342419298f0e597a33bd', '', '', 'default.png');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `banner`
+-- Indexes for table `banner`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `cod`
+-- Indexes for table `cod`
 --
 ALTER TABLE `cod`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `cost_delivery`
+-- Indexes for table `cost_delivery`
 --
 ALTER TABLE `cost_delivery`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `email_send`
+-- Indexes for table `email_send`
 --
 ALTER TABLE `email_send`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `footer`
+-- Indexes for table `footer`
 --
 ALTER TABLE `footer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `grosir`
+-- Indexes for table `grosir`
 --
 ALTER TABLE `grosir`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `img_product`
+-- Indexes for table `img_product`
 --
 ALTER TABLE `img_product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `invoice`
+-- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pages`
+-- Indexes for table `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `payment_proof`
+-- Indexes for table `payment_proof`
 --
 ALTER TABLE `payment_proof`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `rekening`
+-- Indexes for table `rekening`
 --
 ALTER TABLE `rekening`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `settings`
+-- Indexes for table `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `sosmed`
+-- Indexes for table `sosmed`
 --
 ALTER TABLE `sosmed`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `subscriber`
+-- Indexes for table `subscriber`
 --
 ALTER TABLE `subscriber`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `testimonial`
+-- Indexes for table `testimonial`
 --
 ALTER TABLE `testimonial`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaction`
+-- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `banner`
+-- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `cod`
+-- AUTO_INCREMENT for table `cod`
 --
 ALTER TABLE `cod`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `cost_delivery`
+-- AUTO_INCREMENT for table `cost_delivery`
 --
 ALTER TABLE `cost_delivery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `email_send`
+-- AUTO_INCREMENT for table `email_send`
 --
 ALTER TABLE `email_send`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `footer`
+-- AUTO_INCREMENT for table `footer`
 --
 ALTER TABLE `footer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `grosir`
+-- AUTO_INCREMENT for table `grosir`
 --
 ALTER TABLE `grosir`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `img_product`
+-- AUTO_INCREMENT for table `img_product`
 --
 ALTER TABLE `img_product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `invoice`
+-- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `pages`
+-- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `payment_proof`
+-- AUTO_INCREMENT for table `payment_proof`
 --
 ALTER TABLE `payment_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT untuk tabel `rekening`
+-- AUTO_INCREMENT for table `rekening`
 --
 ALTER TABLE `rekening`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `settings`
+-- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `sosmed`
+-- AUTO_INCREMENT for table `sosmed`
 --
 ALTER TABLE `sosmed`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `subscriber`
+-- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `testimonial`
+-- AUTO_INCREMENT for table `testimonial`
 --
 ALTER TABLE `testimonial`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `transaction`
+-- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

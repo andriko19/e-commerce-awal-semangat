@@ -300,6 +300,7 @@
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small"
                     >Login sebagai <?= $usersAdmin['role'];?> <br> (<?= $usersAdmin['nama'];?>)
                   </span>
+                  <img class="img-profile rounded-circle" src="<?= base_url(); ?>asset/images/profile/undraw_profile.svg">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div
