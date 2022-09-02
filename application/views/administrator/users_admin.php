@@ -44,6 +44,7 @@
                   <?php if ($data['role'] == "admin") : ?>
                     
                   <?php else : ?>
+										<a href="<?= base_url() ;?>administrator/users_admin/<?= $data['id']; ?>/edit" class="btn btn-sm btn-info"><i class="fa fa-pen"></i></a>
                     <a href="<?= base_url() ;?>administrator/delete_users_admin/<?= $data['id']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></a>
                   <?php endif ?>    
                 </td>

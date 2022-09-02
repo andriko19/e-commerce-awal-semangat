@@ -1407,6 +1407,69 @@ class Administrator extends CI_Controller {
       }
     }
 
+    public function edit_users_admin($id){
+      $username = $this->session->userdata('username');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
+      $data['usersAdminById'] = $this->db->get_where('admin', ['id' => $id])->row_array();
+      $data['title'] = 'Edit Users Admin - Admin Panel';
+      $this->load->view('templates/header_admin', $data);
+      $this->load->view('administrator/edit_users_admin', $data);
+      $this->load->view('templates/footer_admin');
+    }
+
+    public function edit_username_users_admin(){
+      $id = $this->input->post('id');
+      // $data['usersAdmin'] = $this->db->get_where('admin', ['id' => $id])->row_array();
+      // $id_admin = $data['usersAdmin']['id'];
+      $this->db->set('username', $this->input->post('username'));
+      $this->db->where('id', $id);
+      $this->db->update('admin');
+      $this->session->set_flashdata('upload', "<script>
+          swal({
+          text: 'Username berhasil diubah',
+          icon: 'success'
+          });
+          </script>");
+      redirect(base_url() . 'administrator/users_admin');
+    }
+
+    public function edit_pass_users_admin(){
+      $id = $this->input->post('id');
+      $data['usersAdmin'] = $this->db->get_where('admin', ['id' => $id])->row_array();
+      $admin = $data['usersAdmin']['password'];
+      if(password_verify($this->input->post('oldPassword'), $admin)){
+          if($this->input->post('newPassword') ==  $this->input->post('confirmPassword')){
+              $pass = password_hash($this->input->post('newPassword'), PASSWORD_DEFAULT);
+              $this->db->set('password', $pass);
+              $this->db->where('id', $id);
+              $this->db->update('admin');
+              $this->session->set_flashdata('upload', "<script>
+                  swal({
+                  text: 'Password berhasil diubah',
+                  icon: 'success'
+                  });
+                  </script>");
+              redirect(base_url() . 'administrator/users_admin');
+          }else{
+              $this->session->set_flashdata('upload', "<script>
+                  swal({
+                  text: 'Konfirmasi password tidak sama. Silakan coba lagi',
+                  icon: 'error'
+                  });
+                  </script>");
+              redirect(base_url() . 'administrator/users_admin');
+          }
+      }else{
+          $this->session->set_flashdata('upload', "<script>
+              swal({
+              text: 'Password lama salah. Silakan coba lagi',
+              icon: 'error'
+              });
+              </script>");
+          redirect(base_url() . 'administrator/users_admin');
+      }
+    }
+
     public function delete_users_admin($id){
       $this->db->where('id', $id);
       $this->db->delete('admin');

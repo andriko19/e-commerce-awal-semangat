@@ -66,3 +66,4 @@ $route['administrator/setting/footer'] = 'administrator/footer_setting';
 $route['(:any)'] = 'page/index/$1';
 
 $route['administrator/users_admin/add'] = 'administrator/add_users_admin';
+$route['administrator/users_admin/(:num)/edit'] = 'administrator/edit_users_admin/$1';
