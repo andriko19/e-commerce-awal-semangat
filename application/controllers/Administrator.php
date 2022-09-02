@@ -337,31 +337,15 @@ class Administrator extends CI_Controller {
         $tanggal_awal = $this->input->post('tanggal_awal');
         $tanggal_akhir = $this->input->post('tanggal_akhir');
 
+        $tanggal_awal1 = $tanggal_awal.' 00:00:00';
+        $tanggal_akhir1 = $tanggal_akhir.' 23:59:59';
+
         $data['tanggal_awal'] = $tanggal_awal;
         $data['tanggal_akhir'] = $tanggal_akhir;
-        $data['getLaporan'] = $this->Transaksi_model->getLaporan($tanggal_awal, $tanggal_akhir);
-        // $path = dirname(__DIR__);
-        // $path1 = realpath("logo.png");
-        // date_format($tanggal_awal,"Y/m/d H:i:s");
-        // var_dump($path);
-        // $html = "<img src=' $path1 '";
-        // var_dump($html);
-        // die;
 
-        // $data = array(
-        //     "dataku" => array(
-        //         "nama" => "Awal Semangat",
-        //         "url" => "http://awal_semangat.id",
-        //         "tanggal_awal" => $tanggal_awal,
-        //         "tanggal_akhir" => $tanggal_akhir
-        //     )
-        // );
+        $data['getLaporan'] = $this->Transaksi_model->getLaporan($tanggal_awal1, $tanggal_akhir1);
     
         $this->load->library('dompdf_gen');
-    
-        // $this->dompdf_gen->setPaper('A4', 'potrait');
-        // $this->dompdf_gen->filename = "laporan-petanikode.pdf";
-        // $this->dompdf_gen->load_view('administrator/laporan_pdf', $data);
 
         $this->dompdf_gen->setFileName('Laporan Pembelian '.date("Y-m-d H:i:s").'.pdf');
         $this->dompdf_gen->setPaper('A4', 'potrait');

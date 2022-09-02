@@ -65,7 +65,7 @@
         </thead>
         <tbody>
           
-          <?php $no = 1;
+          <?php $no = 1; $price=0; $qty=0;
           foreach ($getLaporan as $row) : ?>
             <tr>
               <td><?= $no++ ?></td>
@@ -84,22 +84,42 @@
               <td><?= $sql['total_qty'] ?></td>
               <td><?= $row['status'] ?></td>
               <td><?= $row['nama'] ?></td>
+
+              <?php
+                $price += $row['price'];
+                $qty += $sql['total_qty'];
+              ?>
+
             </tr>
           <?php endforeach; ?>
-
-          <!-- <?php
-          for ($x = 0; $x <= 120; $x++) : ?>
-            <tr>
-            <td>No.</td>
-            <td>No. Nota</td>
-            <td>Tanggal</td>
-            <td>Total darga</td>
-            <td>Status</td>
-          </tr>
-          <?php endfor; 
-          ?> -->
-
         </tbody>
+        <tfoot>
+        <tr> 
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+          </tr>
+          <tr>
+            <th colspan="3">Jumlah</th>
+            <th>Rp. <?= number_format($price,0,'','.')  ?></th>
+            <th><?= $qty;?></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr> 
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+            <th> <hr/> </th>
+          </tr>
+        </tfoot>
       </table>
     </main>
     
