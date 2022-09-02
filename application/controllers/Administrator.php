@@ -1827,36 +1827,40 @@ class Administrator extends CI_Controller {
     public function edit(){
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        $data['title'] = 'Edit Profil Admin - Admin Panel';
-        $admin = $this->db->get('admin')->row_array();
-        $data['admin'] = $admin;
-        $this->load->view('templates/header_admin', $data);
-        $this->load->view('administrator/edit', $data);
-        $this->load->view('templates/footer_admin');
+      $data['title'] = 'Edit Profil Admin - Admin Panel';
+      // $admin = $this->db->get('admin')->row_array();
+      // $data['admin'] = $admin;
+      $this->load->view('templates/header_admin', $data);
+      $this->load->view('administrator/edit', $data);
+      $this->load->view('templates/footer_admin');
     }
 
     public function edit_username(){
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        $this->db->set('username', $this->input->post('username'));
-        $this->db->update('admin');
-        $this->session->set_flashdata('upload', "<script>
-            swal({
-            text: 'Username berhasil diubah',
-            icon: 'success'
-            });
-            </script>");
-        redirect(base_url() . 'administrator/edit');
+      $id_admin = $data['usersAdmin']['id'];
+      $this->db->set('username', $this->input->post('username'));
+      $this->db->where('id', $id_admin);
+      $this->db->update('admin');
+      $this->session->set_flashdata('upload', "<script>
+          swal({
+          text: 'Username berhasil diubah',
+          icon: 'success'
+          });
+          </script>");
+      redirect(base_url() . 'administrator/edit');
     }
 
     public function edit_pass(){
       $username = $this->session->userdata('username');
       $data['usersAdmin'] = $this->db->get_where('admin', ['username' => $username])->row_array();
-        $admin = $this->db->get('admin')->row_array();
-        if(password_verify($this->input->post('oldPassword'), $admin['password'])){
+        $admin = $data['usersAdmin']['password'];
+        $id_admin = $data['usersAdmin']['id'];
+        if(password_verify($this->input->post('oldPassword'), $admin)){
             if($this->input->post('newPassword') ==  $this->input->post('confirmPassword')){
                 $pass = password_hash($this->input->post('newPassword'), PASSWORD_DEFAULT);
                 $this->db->set('password', $pass);
+                $this->db->where('id', $id_admin);
                 $this->db->update('admin');
                 $this->session->set_flashdata('upload', "<script>
                     swal({

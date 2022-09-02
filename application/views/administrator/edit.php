@@ -13,7 +13,7 @@
             type="text"
             class="form-control"
             id="username"
-            value="<?= $admin['username']; ?>"
+            value="<?= $usersAdmin['username']; ?>"
             name="username"
             autocomplete="off"
           />
